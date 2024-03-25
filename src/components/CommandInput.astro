@@ -8,6 +8,8 @@ export enum OptionType {
     Channel,
     Role,
     String,
+    Boolean,
+    Number,
 }
 
 export interface CommandOption {
@@ -24,6 +26,8 @@ const optionTypeClass: Record<keyof typeof OptionType, string> = {
     Channel: genericHighlightedOption,
     Role: genericHighlightedOption,
     String: '',
+    Boolean: genericHighlightedOption,
+    Number: '',
 };
 
 ---
@@ -33,11 +37,11 @@ const optionTypeClass: Record<keyof typeof OptionType, string> = {
     <div class="">
     {
         options.map((option) => (
-            <span class="ml-2 last-of-type:mr-2 border-accent-600 dark:border-accent-800 border-[1px] rounded-md flex items-center">
+            <span id="option" class="ml-2 last-of-type:mr-2 border-accent-600 dark:border-accent-800 border-[1px] rounded-md flex items-center">
                 <span class="bg-gray-300 dark:bg-gray-600 px-3 rounded-l-md inline-block self-stretch">{option.name}</span>
                 {/* @ts-expect-error no, I do not care */}
                 <span
-                    class="bg-white dark:bg-gray-950 px-3 rounded-r-md inline-block self-stretch"
+                    class="bg-white dark:bg-gray-950 px-3 rounded-r-md inline-block self-stretch has-[img.emoji]:inline-flex"
                     class:list={optionTypeClass[OptionType[option.type]]}
                 >{
                     option.type === OptionType.Channel ? '#'

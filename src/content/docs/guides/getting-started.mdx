@@ -1,0 +1,61 @@
+---
+title: Getting started
+description: Get Starboard set up in your server
+sidebar:
+    order: 0
+---
+
+import { Aside, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+
+### Setup
+
+Creating a basic starboard configuration is as simple as running a single command:
+
+<CommandInput command="settings edit main" options={[
+    {
+        type: OptionType.Channel,
+        name: 'starboard',
+        value: 'starboard',
+    }
+]}/>
+
+This will set your starboard channel to `#starboard`, and use the default settings of 3 stars.
+
+## Main Settings
+
+Starboard is highly advanced, but has a few main settings that you'll most likely want to change.  Let's take a look at them.
+
+### Required Stars
+
+The first is `required-stars` which, as the name implies, is the amount of stars a message has to gain before being posted to your starboard channel.
+
+By default, your starboard will require 3 stars.
+
+<CommandInput command="settings edit main" options={[
+    {
+        type: OptionType.Number,
+        name: 'required-stars',
+        value: 5,
+    }
+]}/>
+
+### Emojis
+
+The next is `emojis` which are the emojis that can be used as starboard reactions.
+
+<CommandInput command="settings edit main" options={[
+    {
+        type: OptionType.String,
+        name: 'emojis',
+        value: '⭐ 🍣',
+    }
+]}/>
+
+By default, you can have up to 2 emojis.  You can have up to 10 with [Starboard Premium](https://patreon.com/TheNoob27).
+
+---
+
+<Aside type="tip">
+    If you ever get stuck or need help, you can ask in the [Support Server](https://discord.gg/rZgxfbH).
+</Aside>

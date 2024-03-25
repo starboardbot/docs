@@ -36,3 +36,19 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 	--sl-color-gray-7: #f6f6f5;
 	--sl-color-black: #ffffff;
 }
+
+
+/* Twemoji */
+img.emoji {
+	height: 1em;
+	width: 1em;
+	margin: 0 .05em 0 .1em;
+	vertical-align: -0.1em;
+
+	@apply inline-flex align-super;
+ }
+
+ #option  img.emoji {
+	margin-top: auto !important;
+	margin-bottom: auto !important;
+ }
