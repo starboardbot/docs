@@ -4,6 +4,8 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
+	site: 'https://starboardbot.github.io',
+	base: '/docs',
 	integrations: [
 		starlight({
 			title: 'Starboard',
