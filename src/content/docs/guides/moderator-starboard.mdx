@@ -1,0 +1,64 @@
+---
+title: Moderator Starboard
+description: Learn how to only allow mods to star messages
+---
+
+import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+
+<Steps>
+
+0.  If you haven't already, set up the bot
+
+    <LinkCard title="Getting Started" href="../getting-started"/>
+
+1.  Blacklist everyone
+
+    <CommandInput command="blacklist add role" options={[
+        {
+            name: 'role',
+            value: 'everyone',
+            type: OptionType.Role
+        }
+    ]}/>
+
+2.  Whitelist your Moderator role
+
+    This will allow your Moderators to bypass the blacklist.
+
+    <CommandInput command="whitelist add role" options={[
+        {
+            name: 'role',
+            value: 'Moderators',
+            type: OptionType.Role
+        }
+    ]}/>
+
+3.  Filter blacklisted members
+
+    This will make it so that blacklisted members reactions won't be counted by Starboard.
+
+    <CommandInput command="settings edit filtering" options={[
+        {
+            name: 'filter-blacklisted-users',
+            value: 'Filter Reactors',
+            type: OptionType.String
+        }
+    ]}/>
+
+    <Aside type="note">
+        This will allow Moderators to star messages by blacklisted members.
+        
+        If you only want to allow Moderators to star messages by Moderators, you can set set it to filter both Reactors and Message Authors.
+        <CommandInput command="settings edit filtering" options={[
+        {
+            name: 'filter-blacklisted-users',
+            value: 'Filter Both (Reactors & Message Authors)',
+            type: OptionType.String
+        }
+    ]}/>
+    </Aside>
+
+</Steps>
+
+That's it!  Now only Moderators can star messages.

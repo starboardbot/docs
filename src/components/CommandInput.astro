@@ -1,0 +1,72 @@
+---
+interface Props {
+    command: string;
+    options: CommandOption[];
+}
+
+export enum OptionType {
+    Channel,
+    Role,
+    String,
+}
+
+export interface CommandOption {
+    name: string,
+    value: string,
+    type: OptionType,
+}
+
+const { command, options } = Astro.props;
+
+const genericHighlightedOption = 'text-accent-700 dark:text-accent:200';
+
+const optionTypeClass: Record<keyof typeof OptionType, string> = {
+    Channel: genericHighlightedOption,
+    Role: genericHighlightedOption,
+    String: '',
+};
+
+---
+
+<div class="flex-row p-2 pl-4 border-[1px] text-sm border-accent-600 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center text-gray-950 dark:text-gray-200">
+    <span class="font-medium">/{command}</span>
+    {
+        options.map((option) => (
+            <span class="ml-2 border-accent-600 dark:border-accent-800 border-[1px] rounded-md flex items-center">
+                <span class="bg-gray-300 dark:bg-gray-600 px-3 rounded-l-md inline-block">{option.name}</span>
+                {/* @ts-expect-error no, I do not care */}
+                <span
+                    class="bg-white dark:bg-gray-950 px-3 rounded-r-md inline-block"
+                    class:list={optionTypeClass[OptionType[option.type]]}
+                >{
+                    option.type === OptionType.Channel ? '#'
+                    : option.type === OptionType.Role ? '@'
+                    : ''
+            }{option.value}</span>
+            </span>
+        ))
+    }
+    <button id="copy-command" data-command={JSON.stringify({command, options})}>Copy</button>
+</div>
+
+<script>
+import { OptionType, type CommandOption, } from "./CommandInput.astro";
+
+    const formatType = (option: CommandOption) => {
+        return option.type === OptionType.Role ? '@'.concat(option.value)
+                : option.type === OptionType.Channel ? '#'.concat(option.value)
+                : option.value;
+    }
+    const formatCommand = (command: string, options: CommandOption[]) => {
+        return '/'.concat(command, ' ', options.map((option) => option.name.concat(':', formatType(option))).join(' '));
+    };
+
+    document.querySelectorAll('#copy-command').forEach((button) => {
+        // @ts-expect-error 
+        const { command, options, } = JSON.parse(button.dataset.command) as { command: string, options: CommandOption[] };
+        console.log(command, options);
+        button.addEventListener('click', () => {
+            navigator.clipboard.writeText(formatCommand(command, options));
+        });
+    });
+</script>
