@@ -22,12 +22,9 @@ const { command, options } = Astro.props;
 
 const genericHighlightedOption = 'text-accent-700 dark:text-accent:200';
 
-const optionTypeClass: Record<keyof typeof OptionType, string> = {
+const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
     Channel: genericHighlightedOption,
     Role: genericHighlightedOption,
-    String: '',
-    Boolean: genericHighlightedOption,
-    Number: '',
 };
 
 ---
