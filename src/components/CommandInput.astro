@@ -28,15 +28,16 @@ const optionTypeClass: Record<keyof typeof OptionType, string> = {
 
 ---
 
-<div class="flex-row p-2 pl-4 border-[1px] text-sm border-accent-600 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center text-gray-950 dark:text-gray-200">
-    <span class="font-medium">/{command}</span>
+<div class="flex-col md:flex-row pl-4 border-[1px] text-sm border-accent-500 bg-gray-50 dark:bg-gray-800 rounded-md flex items-center text-gray-950 dark:text-gray-200">
+    <span class="font-medium my-2">/{command}</span>
+    <div class="">
     {
         options.map((option) => (
-            <span class="ml-2 border-accent-600 dark:border-accent-800 border-[1px] rounded-md flex items-center">
-                <span class="bg-gray-300 dark:bg-gray-600 px-3 rounded-l-md inline-block">{option.name}</span>
+            <span class="ml-2 last-of-type:mr-2 border-accent-600 dark:border-accent-800 border-[1px] rounded-md flex items-center">
+                <span class="bg-gray-300 dark:bg-gray-600 px-3 rounded-l-md inline-block self-stretch">{option.name}</span>
                 {/* @ts-expect-error no, I do not care */}
                 <span
-                    class="bg-white dark:bg-gray-950 px-3 rounded-r-md inline-block"
+                    class="bg-white dark:bg-gray-950 px-3 rounded-r-md inline-block self-stretch"
                     class:list={optionTypeClass[OptionType[option.type]]}
                 >{
                     option.type === OptionType.Channel ? '#'
@@ -46,7 +47,8 @@ const optionTypeClass: Record<keyof typeof OptionType, string> = {
             </span>
         ))
     }
-    <button id="copy-command" data-command={JSON.stringify({command, options})}>Copy</button>
+    </div>
+    <button id="copy-command" data-command={JSON.stringify({command, options})} class="bg-accent-600 text-gray-50 hover:bg-accent-700 dark:bg-accent-800 dark:hover:bg-accent-700 hover:ease-in duration-200 m-auto h-[100%] py-2 rounded-md md:mr-2 my-2 focus:ring focus:ring-accent-500 dark:focus:ring-accent-600 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-800" style="margin-top: 0.5rem">Copy</button>
 </div>
 
 <script>
