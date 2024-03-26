@@ -13,79 +13,104 @@ export enum OptionType {
 }
 
 export interface CommandOption {
-    name: string,
-    value: string,
-    type: OptionType,
-    multiple?: boolean,
+    name: string;
+    value: string;
+    type: OptionType;
+    multiple?: boolean;
 }
 
 const { command, options } = Astro.props;
 
-const genericHighlightedOption = 'text-starboard-700 dark:text-starboard-300';
+const genericHighlightedOption = "text-starboard-700 dark:text-starboard-300";
 
 const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
     Channel: genericHighlightedOption,
     Role: genericHighlightedOption,
 };
 
+export const mentionableFormat = (
+    option: CommandOption,
+    mentionable_indicator: string,
+) => {
+    return option.multiple
+        ? option.value
+              .split(" ")
+              .map((mentionable) => mentionable_indicator.concat(mentionable))
+              .join(" ")
+        : mentionable_indicator.concat(option.value);
+};
+
+export const formatChannel = (option: CommandOption) =>
+    mentionableFormat(option, "#");
+export const formatRole = (option: CommandOption) =>
+    mentionableFormat(option, "@");
+
+export const formatType = (option: CommandOption) => {
+    return option.type === OptionType.Role
+        ? formatRole(option)
+        : option.type === OptionType.Channel
+          ? formatChannel(option)
+          : option.value;
+};
 ---
 
-<div class="flex-col md:flex-row pl-4 border-[1px] text-sm border-starboard-900 dark:border-transparent bg-neutral-50 dark:bg-neutral-900 rounded-md flex items-center text-neutral-950 dark:text-neutral-200">
+<div
+    class="flex-col md:flex-row pl-4 border-[1px] text-sm border-starboard-900 dark:border-transparent bg-neutral-50 dark:bg-neutral-900 rounded-md flex items-center text-neutral-950 dark:text-neutral-200"
+>
     <span class="font-medium my-2">/{command}</span>
     <div class="">
-    {
-        options.map((option) => (
-            <span id="option" class="w-fit ml-2 last-of-type:mr-2 border-starboard-900 dark:border-starboard-700 border-[1px] rounded-md flex items-center">
-                <span class="bg-neutral-200 dark:bg-neutral-700 px-3 rounded-l-md inline-block self-stretch">{option.name}</span>
-                {/* @ts-expect-error no, I do not care */}
+        {
+            options.map((option) => (
                 <span
-                    class="bg-neutral-50 dark:bg-neutral-950 px-3 rounded-r-md inline-block self-stretch has-[img.emoji]:inline-flex"
-                    class:list={optionTypeClass[OptionType[option.type]]}
-                >{
-                    option.type === OptionType.Channel ? '#'
-                    : option.type === OptionType.Role ? '@'
-                    : ''
-            }{option.value}</span>
-            </span>
-        ))
-    }
+                    id="option"
+                    class="w-fit ml-2 last-of-type:mr-2 border-starboard-900 dark:border-starboard-700 border-[1px] rounded-md flex items-center"
+                >
+                    <span class="bg-neutral-200 dark:bg-neutral-700 px-3 rounded-l-md inline-block self-stretch">
+                        {option.name}
+                    </span>
+                    {/* @ts-expect-error no, I do not care */}
+                    <span
+                        class="bg-neutral-50 dark:bg-neutral-950 px-3 rounded-r-md inline-block self-stretch has-[img.emoji]:inline-flex"
+                        class:list={optionTypeClass[OptionType[option.type]]}
+                    >
+                        {formatType(option)}
+                    </span>
+                </span>
+            ))
+        }
     </div>
     <button
         id="copy-command"
-        data-command={JSON.stringify({command, options})}
+        data-command={JSON.stringify({ command, options })}
         class="bg-starboard-200 hover:bg-starboard-300 dark:bg-starboard-700 dark:hover:bg-starboard-600 text-neutral-900 dark:text-neutral-200 hover:ease-in duration-200 m-auto h-[100%] py-[0.35rem] px-3 rounded-md md:mr-2 my-2 focus:ring-2 focus:ring-starboard-500 dark:focus:ring-starboard-600 ring-offset-1 ring-offset-neutral-50 dark:ring-offset-neutral-800"
-        style="margin-top: 0.5rem"
-    >Copy</button>
+        style="margin-top: 0.5rem">Copy</button
+    >
 </div>
 
 <script>
-import { OptionType, type CommandOption, } from "./CommandInput.astro";
+    import {
+        type CommandOption,
+        formatType,
+    } from "./CommandInput.astro";
 
-    const mentionableFormat = (option: CommandOption, mentionable_indicator: string) => {
-        return option.multiple ?
-            option.value.split(' ')
-                .map((mentionable) => mentionable_indicator.concat(mentionable))
-                .join(' ')
-            : mentionable_indicator.concat(option.value);
-    }
-
-    const formatChannel = (option: CommandOption) => mentionableFormat(option, '#');
-    const formatRole = (option: CommandOption) => mentionableFormat(option, '@');
-
-    const formatType = (option: CommandOption) => {
-        return option.type === OptionType.Role ? formatRole(option)
-                : option.type === OptionType.Channel ? formatChannel(option)
-                : option.value;
-    }
     const formatCommand = (command: string, options: CommandOption[]) => {
-        return '/'.concat(command, ' ', options.map((option) => option.name.concat(':', formatType(option))).join(' '));
+        return "/".concat(
+            command,
+            " ",
+            options
+                .map((option) => option.name.concat(":", formatType(option)))
+                .join(" "),
+        );
     };
 
-    document.querySelectorAll('#copy-command').forEach((button) => {
-        // @ts-expect-error 
-        const { command, options, } = JSON.parse(button.dataset.command) as { command: string, options: CommandOption[] };
+    document.querySelectorAll("#copy-command").forEach((button) => {
+        // @ts-expect-error
+        const { command, options } = JSON.parse(button.dataset.command) as {
+            command: string;
+            options: CommandOption[];
+        };
         console.log(command, options);
-        button.addEventListener('click', () => {
+        button.addEventListener("click", () => {
             navigator.clipboard.writeText(formatCommand(command, options));
         });
     });
