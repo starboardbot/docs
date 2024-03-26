@@ -1,0 +1,57 @@
+---
+title: Auto-Star Channels
+description: Learn how to make Starboard automatically add reactions to messages
+---
+
+import { Aside, LinkCard, Steps, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+
+### What is an auto-star channel?
+
+An auto-star channel is a channel where Starboard will automatically react to messages with your server's starboard emoji.
+
+<Aside type="note" title="Beating the misconceptions">
+    Auto-star channels do __NOT__ automatically post messages to your starboard channel.
+    
+    They must still get the required amount of stars in order to be posted.
+</Aside>
+
+### Create an auto-star configuration
+
+An auto-star configuration is a set of auto-star channels that share the same settings.
+
+<Steps>
+
+1.  Create an auto-star configuration
+
+    <CommandInput command="autostar create" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'my first autostar channel',
+        },
+        {
+            type: OptionType.Channel,
+            name: 'channels',
+            value: 'autostar-channel-1 autostar-channel-2',
+            multiple: true,
+        },
+        {
+            type: OptionType.String,
+            name: 'emojis',
+            value: '⭐ 🍣',
+        },
+    ]}/>
+
+    <Aside type="tip">
+        You can have up to **2** auto-star configurations, with up to **2** emojis and **3** channels each.
+
+        With <ExternalLink type={LinkType.Premium}/>, you can have up to **10** auto-star configurations, with up to **10** emojis and **30** channels each.
+    </Aside>
+
+2.  (Optional) Enhance your auto-star setup with filters
+
+    <LinkCard title="Creating filters" href="../../filters/creating-filters"/>
+
+</Steps>
