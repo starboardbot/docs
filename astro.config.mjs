@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
+import starlightLinksValidator from 'starlight-links-validator';
 
 // https://astro.build/config
 export default defineConfig({
@@ -60,6 +61,7 @@ export default defineConfig({
 			components: {
 				Pagination: './src/components/Pagination.astro',
 			},
+			plugins: [starlightLinksValidator()],
 		}),
 		tailwind({ applyBaseStyles: false }),
 	],
