@@ -1,0 +1,69 @@
+---
+title: Creating Filters
+description: Learn what filters are and how to create them
+---
+
+import { Aside, Steps, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType, } from '../../../components/CommandInput.astro';
+
+### What are filters?
+
+Filters provide a way to, as the name implies, filter what messages are eligible to be starred.
+
+##### Filter types
+
+There are 4 types of filters, each with their respective purpose:
+
+1.  **Age**.  These are relative to how old the message was when it was starred.
+
+2.  **Attachments**.  Attachment filters dictate whether attachments are required, how many are required, etc.
+
+    <Aside type="note">
+        Files, embeds, and links are all considered attachments.
+    </Aside>
+
+3.  **Content**.  Content filters control the content of the message, such as the length, or requiring certain text/patterns to be matched.
+
+4.  **Date**.  Date filters require messages to be starred before/after certain dates.
+
+### Creating filters
+
+<Steps>
+
+1.  The first thing you need to do is to create a filter.
+
+    Let's create an attachments filter, that requires messages to have at least **2** attachments.
+
+    <CommandInput command="filters create attachments" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'my first attachment filter',
+        },
+        {
+            type: OptionType.Number,
+            name: 'min-attachments',
+            value: '2',
+        },
+    ]}/>
+
+2.  So far, this filter exists but doesn't do anything since it hasn't been added to your server's settings.
+
+    Let's change that, by adding it to your settings.
+
+    <CommandInput command="filter add" options={[
+        {
+            type: OptionType.String,
+            name: 'filter',
+            value: 'my first attachment filter',
+        },
+        {
+            type: OptionType.String,
+            name: 'settings',
+            value: 'Server Settings',
+        },
+    ]}/>
+
+</Steps>
+
+That's it!  Messages will now have to have at least **2** attachments in order to be starred.
