@@ -21,7 +21,7 @@ export interface CommandOption {
 
 const { command, options } = Astro.props;
 
-const genericHighlightedOption = "text-starboard-700 dark:text-starboard-300";
+const genericHighlightedOption = "text-starboard-600 dark:text-starboard-300";
 
 const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
     Channel: genericHighlightedOption,
@@ -82,7 +82,7 @@ export const formatType = (option: CommandOption) => {
     <button
         id="copy-command"
         data-command={JSON.stringify({ command, options })}
-        class="bg-starboard-200 hover:bg-starboard-300 dark:bg-starboard-700 dark:hover:bg-starboard-600 text-neutral-900 dark:text-neutral-200 hover:ease-in duration-200 m-auto h-[100%] py-[0.35rem] px-3 rounded-md md:mr-2 my-2 focus:ring-2 focus:ring-starboard-500 dark:focus:ring-starboard-600 ring-offset-1 ring-offset-neutral-50 dark:ring-offset-neutral-800"
+        class="bg-starboard-200 hover:bg-starboard-300 dark:bg-starboard-700 dark:hover:bg-starboard-600 text-neutral-900 dark:text-neutral-200 hover:ease-in duration-200 m-auto h-[100%] py-[0.35rem] px-3 rounded-md md:mr-2 my-2 focus:ring-2 focus:ring-starboard-500 dark:focus:ring-starboard-600 ring-offset-1 ring-offset-neutral-50 dark:ring-offset-neutral-800 cursor-pointer"
         style="margin-top: 0.5rem">Copy</button
     >
 </div>
