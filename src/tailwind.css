@@ -7,33 +7,44 @@ Add additional Tailwind styles to this file, for example with @layer:
 https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 */
 
+/* Fonts */
+:root {
+	--sl-font: Lexend Variable;
+	font-weight: 300;
+}
+
+:root {
+	--sl-sidebar-width: 15rem;
+	--sl-content-width: 55rem;
+}
+
 /* Dark mode colors. */
 :root {
-	--sl-color-accent-low: #2a2404;
-	--sl-color-accent: #7a6a00;
-	--sl-color-accent-high: #d0caa6;
+	--sl-color-accent-low: theme('colors.neutral.800');
+	--sl-color-accent: #ecd557;
+	--sl-color-accent-high: #eee2a0;
 	--sl-color-white: #ffffff;
-	--sl-color-gray-1: #eeeeec;
-	--sl-color-gray-2: #c2c2c0;
-	--sl-color-gray-3: #8c8b88;
-	--sl-color-gray-4: #595855;
-	--sl-color-gray-5: #393835;
-	--sl-color-gray-6: #272724;
-	--sl-color-black: #181817;
+	--sl-color-gray-1: theme('colors.neutral.50');
+	--sl-color-gray-2: theme('colors.neutral.200');
+	--sl-color-gray-3: theme('colors.neutral.500');
+	--sl-color-gray-4: theme('colors.neutral.600');
+	--sl-color-gray-5: theme('colors.neutral.800');
+	--sl-color-gray-6: theme('colors.neutral.900');
+	--sl-color-black: theme('colors.neutral.950');
 }
 /* Light mode colors. */
 :root[data-theme='light'] {
-	--sl-color-accent-low: #dcd8bd;
-	--sl-color-accent: #7c6c00;
-	--sl-color-accent-high: #3b3200;
-	--sl-color-white: #181817;
-	--sl-color-gray-1: #272724;
-	--sl-color-gray-2: #393835;
-	--sl-color-gray-3: #595855;
-	--sl-color-gray-4: #8c8b88;
-	--sl-color-gray-5: #c2c2c0;
-	--sl-color-gray-6: #eeeeec;
-	--sl-color-gray-7: #f6f6f5;
+	--sl-color-accent-low: #eee2a0;
+	--sl-color-accent: #ecd557;
+	--sl-color-accent-high: theme('colors.neutral.950');
+	--sl-color-white: theme('colors.neutral.950');
+	--sl-color-gray-1: theme('colors.neutral.950');
+	--sl-color-gray-2: theme('colors.neutral.900');
+	--sl-color-gray-3: theme('colors.neutral.800');
+	--sl-color-gray-4: theme('colors.neutral.600');
+	--sl-color-gray-5: theme('colors.neutral.500');
+	--sl-color-gray-6: theme('colors.neutral.200');
+	--sl-color-gray-7: theme('colors.neutral.50');
 	--sl-color-black: #ffffff;
 }
 

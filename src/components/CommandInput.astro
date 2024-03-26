@@ -20,7 +20,7 @@ export interface CommandOption {
 
 const { command, options } = Astro.props;
 
-const genericHighlightedOption = 'text-accent-700 dark:text-accent:200';
+const genericHighlightedOption = 'text-starboard-700 dark:text-starboard-300';
 
 const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
     Channel: genericHighlightedOption,
@@ -29,16 +29,16 @@ const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
 
 ---
 
-<div class="flex-col md:flex-row pl-4 border-[1px] text-sm border-accent-500 bg-gray-50 dark:bg-gray-800 rounded-md flex items-center text-gray-950 dark:text-gray-200">
+<div class="flex-col md:flex-row pl-4 border-[1px] text-sm border-starboard-900 dark:border-transparent bg-neutral-50 dark:bg-neutral-900 rounded-md flex items-center text-neutral-950 dark:text-neutral-200">
     <span class="font-medium my-2">/{command}</span>
     <div class="">
     {
         options.map((option) => (
-            <span id="option" class="ml-2 last-of-type:mr-2 border-accent-600 dark:border-accent-800 border-[1px] rounded-md flex items-center">
-                <span class="bg-gray-300 dark:bg-gray-600 px-3 rounded-l-md inline-block self-stretch">{option.name}</span>
+            <span id="option" class="ml-2 last-of-type:mr-2 border-starboard-900 dark:border-starboard-700 border-[1px] rounded-md flex items-center">
+                <span class="bg-neutral-200 dark:bg-neutral-700 px-3 rounded-l-md inline-block self-stretch">{option.name}</span>
                 {/* @ts-expect-error no, I do not care */}
                 <span
-                    class="bg-white dark:bg-gray-950 px-3 rounded-r-md inline-block self-stretch has-[img.emoji]:inline-flex"
+                    class="bg-neutral-50 dark:bg-neutral-950 px-3 rounded-r-md inline-block self-stretch has-[img.emoji]:inline-flex"
                     class:list={optionTypeClass[OptionType[option.type]]}
                 >{
                     option.type === OptionType.Channel ? '#'
@@ -49,7 +49,12 @@ const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
         ))
     }
     </div>
-    <button id="copy-command" data-command={JSON.stringify({command, options})} class="bg-accent-600 text-gray-50 hover:bg-accent-700 dark:bg-accent-800 dark:hover:bg-accent-700 hover:ease-in duration-200 m-auto h-[100%] py-2 rounded-md md:mr-2 my-2 focus:ring focus:ring-accent-500 dark:focus:ring-accent-600 ring-offset-2 ring-offset-gray-50 dark:ring-offset-gray-800" style="margin-top: 0.5rem">Copy</button>
+    <button
+        id="copy-command"
+        data-command={JSON.stringify({command, options})}
+        class="bg-starboard-200 hover:bg-starboard-300 dark:bg-starboard-700 dark:hover:bg-starboard-600 text-neutral-900 dark:text-neutral-200 hover:ease-in duration-200 m-auto h-[100%] py-[0.35rem] px-3 rounded-md md:mr-2 my-2 focus:ring-2 focus:ring-starboard-500 dark:focus:ring-starboard-600 ring-offset-1 ring-offset-neutral-50 dark:ring-offset-neutral-800"
+        style="margin-top: 0.5rem"
+    >Copy</button>
 </div>
 
 <script>

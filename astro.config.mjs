@@ -40,7 +40,10 @@ export default defineConfig({
 					],
 				}
 			],
-			customCss: ['./src/tailwind.css'],
+			customCss: [
+				'./src/tailwind.css',
+				'@fontsource-variable/lexend',
+			],
 			head: [
 				{
 					tag: 'script',
@@ -54,6 +57,9 @@ export default defineConfig({
 					content: 'window.addEventListener(\'load\', () => {console.log(\'loaded\'); twemoji.parse(document.body)})'
 				},
 			],
+			components: {
+				Pagination: './src/components/Pagination.astro',
+			},
 		}),
 		tailwind({ applyBaseStyles: false }),
 	],
