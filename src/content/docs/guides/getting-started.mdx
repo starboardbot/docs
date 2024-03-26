@@ -7,6 +7,7 @@ sidebar:
 
 import { Aside, } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
 
 ### Setup
 
@@ -52,10 +53,10 @@ The next is `emojis` which are the emojis that can be used as starboard reaction
     }
 ]}/>
 
-By default, you can have up to 2 emojis.  You can have up to 10 with [Starboard Premium](https://patreon.com/TheNoob27).
+By default, you can have up to 2 emojis.  You can have up to 10 with <ExternalLink type={LinkType.Premium}/>.
 
 ---
 
 <Aside type="tip">
-    If you ever get stuck or need help, you can ask in the [Support Server](https://discord.gg/rZgxfbH).
+    If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
 </Aside>

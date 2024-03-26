@@ -1,0 +1,23 @@
+---
+interface Props {
+    type: LinkType;
+}
+
+export enum LinkType {
+    Premium = 'premium',
+    Support = 'support',
+}
+
+import { links, } from '../config';
+
+const { type, } = Astro.props;
+
+const href = links[type];
+
+---
+
+<a href={href} target="_blank">{
+    type === LinkType.Premium ? 'Starboard Premium'
+    : type === LinkType.Support ? 'Support Server'
+    : '???'
+}</a>
