@@ -16,6 +16,7 @@ export interface CommandOption {
     name: string,
     value: string,
     type: OptionType,
+    multiple?: boolean,
 }
 
 const { command, options } = Astro.props;
@@ -34,7 +35,7 @@ const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
     <div class="">
     {
         options.map((option) => (
-            <span id="option" class="ml-2 last-of-type:mr-2 border-starboard-900 dark:border-starboard-700 border-[1px] rounded-md flex items-center">
+            <span id="option" class="w-fit ml-2 last-of-type:mr-2 border-starboard-900 dark:border-starboard-700 border-[1px] rounded-md flex items-center">
                 <span class="bg-neutral-200 dark:bg-neutral-700 px-3 rounded-l-md inline-block self-stretch">{option.name}</span>
                 {/* @ts-expect-error no, I do not care */}
                 <span
@@ -60,9 +61,20 @@ const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
 <script>
 import { OptionType, type CommandOption, } from "./CommandInput.astro";
 
+    const mentionableFormat = (option: CommandOption, mentionable_indicator: string) => {
+        return option.multiple ?
+            option.value.split(' ')
+                .map((mentionable) => mentionable_indicator.concat(mentionable))
+                .join(' ')
+            : mentionable_indicator.concat(option.value);
+    }
+
+    const formatChannel = (option: CommandOption) => mentionableFormat(option, '#');
+    const formatRole = (option: CommandOption) => mentionableFormat(option, '@');
+
     const formatType = (option: CommandOption) => {
-        return option.type === OptionType.Role ? '@'.concat(option.value)
-                : option.type === OptionType.Channel ? '#'.concat(option.value)
+        return option.type === OptionType.Role ? formatRole(option)
+                : option.type === OptionType.Channel ? formatChannel(option)
                 : option.value;
     }
     const formatCommand = (command: string, options: CommandOption[]) => {
