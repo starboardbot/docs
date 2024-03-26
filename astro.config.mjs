@@ -24,6 +24,17 @@ export default defineConfig({
 					},
 				},
 				{
+					label: 'Docs',
+					items: [
+						{
+							label: 'Filters',
+							autogenerate: {
+								directory: '/filters',
+							},
+						},
+					],
+				},
+				{
 					label: 'Links',
 					items: [
 						{
