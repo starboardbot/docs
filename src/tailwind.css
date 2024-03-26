@@ -18,6 +18,10 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 	--sl-content-width: 55rem;
 }
 
+nav:has(#starlight__on-this-page) ul li {
+	@apply text-balance;
+}
+
 /* Dark mode colors. */
 :root {
 	--sl-color-accent-low: theme('colors.neutral.800');
