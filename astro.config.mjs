@@ -24,15 +24,16 @@ export default defineConfig({
 					},
 				},
 				{
-					label: 'Docs',
-					items: [
-						{
-							label: 'Filters',
-							autogenerate: {
-								directory: '/filters',
-							},
-						},
-					],
+					label: 'Filters',
+					autogenerate: {
+						directory: '/filters',
+					},
+				},
+				{
+					label: 'Overrides',
+					autogenerate: {
+						directory: '/overrides',
+					},
 				},
 				{
 					label: 'Links',

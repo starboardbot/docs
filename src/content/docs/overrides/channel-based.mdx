@@ -1,0 +1,50 @@
+---
+title: Channel-Based Overrides
+description: Learn how to create channel-based overrides
+---
+
+import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+
+Channel-based overrides are useful when you want to change specific settings for a group of channels.
+
+##### This guide will use the following scenario:
+
+You have your Server Settings set to use the ⭐ emoji, but you want to use the 🎨 emoji for your art channels.
+
+<Steps>
+
+1.  The first thing you need to do is create an override for the art channels
+
+    <CommandInput command="overrides create channel" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'art channel override',
+        },
+        {
+            type: OptionType.Channel,
+            name: 'channels',
+            value: 'art-share art-discussion',
+            multiple: true,
+        }
+    ]}/>
+
+2.  Next, you need to change the settings for the override you just created
+
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'art channel override',
+        },
+        {
+            type: OptionType.String,
+            name: 'emojis',
+            value: '🎨',
+        },
+    ]}/>
+
+</Steps>
+
+That's it!  Messages in the art channels will now use the 🎨 emoji.
