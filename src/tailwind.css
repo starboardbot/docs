@@ -60,8 +60,12 @@ img.emoji {
 	margin: 0 .05em 0 .1em;
 	vertical-align: -0.1em;
 
-	@apply inline-flex align-super;
+	@apply inline-flex;
  }
+
+#command img.emoji {
+	@apply align-super;
+}
 
  #option  img.emoji {
 	margin-top: auto !important;

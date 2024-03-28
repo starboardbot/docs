@@ -66,7 +66,7 @@ export default defineConfig({
 				},
 				{
 					tag: 'script',
-					content: 'window.addEventListener(\'load\', () => {console.log(\'loaded\'); twemoji.parse(document.body)})'
+					content: 'window.addEventListener(\'load\', () => {console.log(\'loaded\'); twemoji.parse(document.body, {\'base\':\'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/\'})})'
 				},
 			],
 			components: {
