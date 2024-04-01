@@ -22,6 +22,28 @@ nav:has(#starlight__on-this-page) ul li {
 	@apply text-balance;
 }
 
+h1 {
+	font-weight: 700;
+	text-align: center;
+}
+
+
+.sl-markdown-content {
+	@apply md:px-6
+}
+
+.content-panel {
+	border: none !important;
+}
+
+.starlight-aside {
+	@apply rounded-lg
+}
+
+.hero img {
+	@apply rounded-xl
+}
+
 /* Dark mode colors. */
 :root {
 	--sl-color-accent-low: theme('colors.neutral.800');
@@ -55,8 +77,8 @@ nav:has(#starlight__on-this-page) ul li {
 
 /* Twemoji */
 img.emoji {
-	height: 1em;
-	width: 1em;
+	height: 1.2em;
+	width: 1.2em;
 	margin: 0 .05em 0 .1em;
 	vertical-align: -0.1em;
 
@@ -65,9 +87,16 @@ img.emoji {
 
 #command img.emoji {
 	@apply align-super;
+	height: 1.5em;
+	width: 1.5em;
 }
 
- #option  img.emoji {
+#option img.emoji {
 	margin-top: auto !important;
 	margin-bottom: auto !important;
- }
+}
+
+/* markdown */
+code {
+	@apply rounded-sm
+}
