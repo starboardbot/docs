@@ -1,0 +1,62 @@
+---
+title: Age-Restricted Starboard
+description: Learn how to make an age-restricted starboard.
+sidebar:
+    order: 2
+---
+
+import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+
+This guide will teach you how to make an age-restricted starboard, for messages from age-restricted channels to be sent to.
+
+<Aside type="note">
+  Starboard will __NOT__ send messages from age-restricted channels to a channel that is not also marked as age-restricted.
+
+  If your current starboard channel is marked as age-restricted, messages from both age-restricted and non age-restricted channels can be sent there.
+</Aside>
+
+
+This age-restricted starboard will be created using a **channel-type-based override**. You can read up on them here:
+
+<LinkCard title="Channel-Type-Based Overrides" href="../../overrides/channel-type-based"/>
+
+
+---
+
+<Steps>
+
+1.  Create a channel-type override, for All NSFW Channels, and set the starboard:
+
+    <CommandInput command="overrides create channel-type" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'Age Restricted Channels',
+        },
+        {
+            type: OptionType.String,
+            name: 'channel-types',
+            value: 'All NSFW Channels',
+        }
+    ]}/>
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Age Restricted Channels',
+        },
+        {
+            type: OptionType.Channel,
+            name: 'starboard',
+            value: "nsfw-starboard",
+        },
+    ]}/>
+
+</Steps>
+
+<Aside type="note" title="Be careful!">
+  Make sure your `#nsfw-starboard` is marked as age-restricted!
+</Aside>
+
+That's it!  Messages from all age-restricted channels will now be sent to an age-restricted starboard.
