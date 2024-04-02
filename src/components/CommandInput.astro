@@ -17,6 +17,7 @@ export interface CommandOption {
     value: string;
     type: OptionType;
     multiple?: boolean;
+    highlight?: boolean;
 }
 
 const { command, options } = Astro.props;
@@ -58,13 +59,14 @@ export const formatType = (option: CommandOption) => {
     id="command"
     class="flex-col md:flex-row pl-4 border-[1px] text-sm border-starboard-900 dark:border-transparent bg-neutral-50 dark:bg-neutral-900 rounded-md flex items-center text-neutral-950 dark:text-neutral-200"
 >
-    <span class="font-medium my-2">/{command}</span>
-    <div class="flex flex-wrap flex-row gap-2 mx-2 my-3">
+    <div class="flex flex-wrap flex-row gap-x-2 gap-y-1 mx-2 my-3">
+        <span class="font-medium">/{command}</span>
         {
             options.map((option) => (
                 <span
                     id="option"
                     class="w-fit ring-1 ring-starboard-900 dark:ring-starboard-500/60 rounded-md overflow-hidden flex items-center"
+                    class:list={option.highlight ? "ring-2 ring-starboard-400 dark:ring-starboard-400" : ""}
                 >
                     <span class="bg-neutral-200 dark:bg-neutral-700 px-3 self-stretch flex items-center">
                         {option.name}
