@@ -1,6 +1,8 @@
 ---
 title: Creating Filters
 description: Learn what filters are and how to create them
+sidebar:
+  order: 0
 ---
 
 import { Aside, Steps, } from '@astrojs/starlight/components';
@@ -32,7 +34,7 @@ There are 4 types of filters, each with their respective purpose:
 
 1.  The first thing you need to do is to create a filter.
 
-    Let's create an attachments filter, that requires messages to have at least **2** attachments.
+    Let's create an attachments filter, that requires messages to have at least **2** attachments:
 
     <CommandInput command="filters create attachments" options={[
         {
@@ -49,7 +51,7 @@ There are 4 types of filters, each with their respective purpose:
 
 2.  So far, this filter exists but doesn't do anything since it hasn't been added to your server's settings.
 
-    Let's change that, by adding it to your settings.
+    Let's change that, by adding it to your settings:
 
     <CommandInput command="filter add" options={[
         {

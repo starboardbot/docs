@@ -1,0 +1,82 @@
+---
+title: Advanced Filters
+description: Learn about more advanced setups for filters
+---
+import { Aside, Steps, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType, } from '../../../components/CommandInput.astro';
+
+### Optional Filters
+
+When adding filters to your server's settings, you can mark them as **optional**.
+
+When two or more optional filters are beside eachother, only one of them has to pass to allow the message to get stars.
+
+<Aside type="note" title="Be careful!">
+    If an optional filter is by itself, it still has to pass for the message to be able to get stars.
+</Aside>
+
+##### This guide will use the following scenario:
+
+You have 3 filters:
+
+1. "**Cat Lover**" - a message must include the word "cat" and have 300 or more characters
+
+2. “**Dog Lover**" - a message must include the word "dog" and have 20 or more characters
+
+3. “**Animal Image**" - a message must include at least 1 attachment
+
+You want to set up your server so that users must pass the third filter, and must pass either the first **or** the second filter (either be a cat or dog lover, and show proof).
+
+<Steps>
+1.  All you have to do is add the filters, ensuring you mark the mutually-dependant ones as optional:
+    <CommandInput command="filter add" options={[
+        {
+            type: OptionType.String,
+            name: 'filter',
+            value: 'Cat Lover',
+        },
+        {
+            type: OptionType.String,
+            name: 'settings',
+            value: 'Server Settings',
+        },
+        {
+            type: OptionType.Boolean,
+            name: 'optional',
+            value: 'True',
+            highlight: true,
+        },
+    ]}/>
+    <CommandInput command="filter add" options={[
+        {
+            type: OptionType.String,
+            name: 'filter',
+            value: 'Dog Lover',
+        },
+        {
+            type: OptionType.String,
+            name: 'settings',
+            value: 'Server Settings',
+        },
+        {
+            type: OptionType.Boolean,
+            name: 'optional',
+            value: 'True',
+            highlight: true,
+        },
+    ]}/>
+    <CommandInput command="filter add" options={[
+        {
+            type: OptionType.String,
+            name: 'filter',
+            value: 'Animal Image',
+        },
+        {
+            type: OptionType.String,
+            name: 'settings',
+            value: 'Server Settings',
+        },
+    ]}/>
+</Steps>
+
+That's it! Now messages need to pass the "**Animal Image**" filter, and need to either pass the "**Cat Lover**" filter or the "**Dog Lover**" filter.
