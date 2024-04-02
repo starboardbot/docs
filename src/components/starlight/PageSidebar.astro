@@ -1,0 +1,16 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+
+import MobileTableOfContents from '@astrojs/starlight/components/MobileTableOfContents.astro';
+---
+
+{
+	Astro.props.toc && (
+		<>
+			<div class="lg:sl-hidden">
+				<MobileTableOfContents {...Astro.props} />
+			</div>
+			</div>
+		</>
+	)
+}

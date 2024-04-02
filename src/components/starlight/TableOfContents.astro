@@ -1,0 +1,43 @@
+---
+import TableOfContentsList from '../../../node_modules/@astrojs/starlight/components/TableOfContents/TableOfContentsList.astro';
+import { type TocItem, } from '../../../node_modules/@astrojs/starlight/utils/generateToC';
+import type { Props } from '@astrojs/starlight/props';
+
+let { toc } = Astro.props;
+
+const recursivelyDecreaseDepth = (tocItem: TocItem | TocItem[]): TocItem | TocItem[] => {
+    if (Array.isArray(tocItem)) {
+        for (const item of tocItem) {
+            recursivelyDecreaseDepth(item);
+        }
+        return tocItem;
+    }
+    tocItem.depth--;
+    for (const child of tocItem.children) {
+        recursivelyDecreaseDepth(child);
+    }
+    return tocItem;
+}
+
+const isOnlyOverview = toc?.items.length === 1 && toc.items[0].slug === '_top';
+
+if (toc && isOnlyOverview) toc = {...toc, items: toc!.items[0].children, };
+---
+
+{
+	toc && !!toc.items.length && (
+		<starlight-toc
+            data-min-h={toc.minHeadingLevel}
+            data-max-h={toc.maxHeadingLevel}
+            id="table-of-contents"
+            class="border-l-[1px] hidden lg:block border-l-neutral-200 dark:border-l-neutral-800 mb-1 ml-1"
+        >
+			<nav aria-labelledby="starlight__on-this-page">
+                <!-- @ts-expect-error can't be bothered to do better types -->
+				<TableOfContentsList toc={isOnlyOverview ? recursivelyDecreaseDepth(toc.items) : toc.items} />
+			</nav>
+		</starlight-toc>
+	)
+}
+
+<script src="../../../node_modules/@astrojs/starlight/components/TableOfContents/starlight-toc"></script>

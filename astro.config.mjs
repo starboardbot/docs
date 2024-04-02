@@ -72,8 +72,10 @@ export default defineConfig({
 				},
 			],
 			components: {
+				PageSidebar: './src/components/starlight/PageSidebar.astro',
 				Pagination: './src/components/starlight/Pagination.astro',
-				Pagination: './src/components/Pagination.astro',
+				Sidebar: './src/components/starlight/Sidebar.astro',
+				TwoColumnContent: './src/components/starlight/TwoColumnContentIsALie.astro',
 			},
 			plugins: [starlightLinksValidator()],
 		}),

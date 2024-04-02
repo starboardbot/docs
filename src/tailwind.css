@@ -44,6 +44,26 @@ h1 {
 	@apply rounded-xl
 }
 
+/* This is all for the unified sidebar */
+.main-pane {
+	@apply !w-full;
+}
+
+.content-panel {
+	@apply py-6 lg:px-12;
+	/* Inner content panel */
+	--sl-content-margin-inline: auto;
+	--sl-content-width: 100%;
+}
+
+#table-of-contents a {
+	@apply no-underline text-sm text-neutral-900 dark:text-neutral-100 leading-4;
+}
+
+#table-of-contents a:where([aria-current='true']) {
+	@apply text-starboard-400 dark:text-starboard-300;
+}
+
 /* Dark mode colors. */
 :root {
 	--sl-color-accent-low: theme('colors.neutral.800');
