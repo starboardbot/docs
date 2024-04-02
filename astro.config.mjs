@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
 import starlightLinksValidator from 'starlight-links-validator';
+import { links, } from './src/config';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,9 +13,9 @@ export default defineConfig({
 			title: 'Starboard',
 			favicon: 'favicon.png',
 			social: {
-				discord: 'https://discord.gg/rZgxfbH',
-				github: 'https://github.com/starboardbot/docs',
-				patreon: 'https://patreon.com/TheNoob27',
+				discord: links.support,
+				github: links.github,
+				patreon: links.premium,
 			},
 			sidebar: [
 				{
@@ -40,15 +41,15 @@ export default defineConfig({
 					items: [
 						{
 							label: 'Support Server',
-							link: 'https://discord.gg/rZgxfbH',
+							link: links.support,
 						},
 						{
 							label: 'Vote for Starboard',
-							link: 'https://top.gg/bot/655390915325591629/vote',
+							link: links.topGG,
 						},
 						{
 							label: 'Starboard Premium',
-							link: 'https://patreon.com/TheNoob27',
+							link: links.premium,
 						},
 					],
 				}
