@@ -4,10 +4,10 @@ import type { Props } from '@astrojs/starlight/props';
 import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
 import SidebarSublist from './SidebarSublist.astro';
 
-const { sidebar, toc } = Astro.props;
+const { sidebar } = Astro.props;
 ---
 
-<SidebarSublist sublist={sidebar} toc={toc} parentProps={Astro.props} />
+<SidebarSublist sublist={sidebar} parentProps={Astro.props} />
 <div class="md:sl-hidden">
 	<MobileMenuFooter {...Astro.props} />
 </div>

@@ -9,11 +9,6 @@ import { type Props as StarlightProps } from '@astrojs/starlight/props';
 interface Props {
 	sublist: SidebarEntry[];
 	nested?: boolean;
-	toc?: {
-    	minHeadingLevel: number;
-    	maxHeadingLevel: number;
-    	items: TocItem[];
-	};
 	parentProps: StarlightProps;
 }
 
