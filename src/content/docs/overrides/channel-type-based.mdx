@@ -1,0 +1,51 @@
+---
+title: Channel-Type-Based Overrides
+description: Learn how to create channel-type-based overrides
+sidebar:
+    order: 2
+---
+
+import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+
+Channel-type-based overrides are useful when you want to change specific settings based on the type of channel.
+
+##### This guide will use the following scenario:
+
+You have your Server Settings set to send messages to the starboard at 10 stars, but Text-in-Voice channels aren't as active so you want to set the required amount to 2 for them instead.
+
+<Steps>
+
+1.  The first thing you need to do is create an override for all voice channels:
+
+    <CommandInput command="overrides create channel-type" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'Voice Channels',
+        },
+        {
+            type: OptionType.String,
+            name: 'channel-types',
+            value: 'All Voice/Stage Channels',
+        }
+    ]}/>
+
+2.  Next, you'll need to change the settings for the override you've just created:
+
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Voice Channels',
+        },
+        {
+            type: OptionType.Number,
+            name: 'required-stars',
+            value: 2,
+        },
+    ]}/>
+
+</Steps>
+
+That's it!  Messages in all voice channels will now require only 2 stars.

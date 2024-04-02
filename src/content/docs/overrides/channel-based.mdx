@@ -1,6 +1,8 @@
 ---
 title: Channel-Based Overrides
 description: Learn how to create channel-based overrides
+sidebar:
+    order: 1
 ---
 
 import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
@@ -14,13 +16,13 @@ You have your Server Settings set to use the ⭐ emoji, but you want to use the 
 
 <Steps>
 
-1.  The first thing you need to do is create an override for the art channels
+1.  The first thing you need to do is create an override for the art channels:
 
     <CommandInput command="overrides create channel" options={[
         {
             type: OptionType.String,
             name: 'name',
-            value: 'art channel override',
+            value: 'Art Channels',
         },
         {
             type: OptionType.Channel,
@@ -30,13 +32,13 @@ You have your Server Settings set to use the ⭐ emoji, but you want to use the 
         }
     ]}/>
 
-2.  Next, you need to change the settings for the override you just created
+2.  Next, you need to change the settings for the override you just created:
 
     <CommandInput command="settings edit main" options={[
         {
             type: OptionType.String,
             name: 'override',
-            value: 'art channel override',
+            value: 'Art Channels',
         },
         {
             type: OptionType.String,

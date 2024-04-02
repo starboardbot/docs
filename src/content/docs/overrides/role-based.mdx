@@ -1,0 +1,83 @@
+---
+title: Role-Based Overrides
+description: Learn how to create role-based overrides
+sidebar:
+    order: 2
+---
+
+import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+
+Role-based overrides are useful when you want to change specific settings based on the roles the author of the starred message has.
+
+<Aside type="note">
+    The roles that the reactor/starrer has, has no effect on which role-based overrides are applied and which settings are used.
+</Aside>
+
+##### This guide will use the following scenario:
+
+You have your Server Settings set to send messages to `#starboard` after 7 stars, but members with the `@Prestigious` role are special, they get their messages sent to `#prestigious-starboard` after 3 stars.
+
+<Steps>
+
+1.  The first thing you need to do is create an override for the `@Prestigious` role:
+
+    <CommandInput command="overrides create role" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'Prestigious',
+        },
+        {
+            type: OptionType.String,
+            name: 'roles',
+            value: '@Prestigious',
+        }
+    ]}/>
+
+    <Aside type="tip">
+        If you want this role-based override to only apply in a set of channels and not in all channels, you can provide a list of channels:
+        <CommandInput command="overrides create role" options={[
+            {
+                type: OptionType.String,
+                name: 'name',
+                value: 'Prestigious',
+            },
+            {
+                type: OptionType.String,
+                name: 'roles',
+                value: '@Prestigious',
+            },
+            {
+                type: OptionType.Channel,
+                name: 'channels',
+                value: 'general prestigious-chat-1 prestigious-chat-2',
+                multiple: true,
+                highlight: true,
+            }
+        ]}/>
+    </Aside>
+
+2.  Next, you'll need to change the settings for the override you've just created:
+
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Prestigious',
+        },
+        {
+            type: OptionType.Channel,
+            name: 'starboard',
+            value: "prestigious-starboard",
+        },
+        {
+            type: OptionType.Number,
+            name: 'required-stars',
+            value: 3,
+        },
+    ]}/>
+
+</Steps>
+
+That's it!  Messages by members with the `@Prestigious` role will now be sent to `#prestigious-starboard` after getting 3 stars.

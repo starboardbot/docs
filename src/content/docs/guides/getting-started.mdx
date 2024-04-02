@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: Getting Started
 description: Get Starboard set up in your server
 sidebar:
     order: 0
@@ -27,7 +27,7 @@ This will set your starboard channel to `#starboard`, and use the default settin
 
 Starboard is highly advanced, but has a few main settings that you'll most likely want to change.  Let's take a look at them.
 
-### Required Stars
+#### Required Stars
 
 The first is `required-stars` which, as the name implies, is the amount of stars a message has to gain before being posted to your starboard channel.
 
@@ -41,9 +41,9 @@ By default, your starboard will require 3 stars.
     }
 ]}/>
 
-### Emojis
+#### Emojis
 
-The next is `emojis` which are the emojis that can be used as starboard reactions.
+The next is `emojis` which are the emojis that can be used to add stars to messages — a message needs `required-stars` many reactions of these emojis to reach the starboard.
 
 <CommandInput command="settings edit main" options={[
     {

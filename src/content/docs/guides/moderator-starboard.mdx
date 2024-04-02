@@ -1,6 +1,8 @@
 ---
 title: Moderator Starboard
 description: Learn how to only allow mods to star messages
+sidebar:
+    order: 1
 ---
 
 import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
@@ -12,11 +14,11 @@ This guide will teach you how to only allow Moderators to star messages.
 
 <Steps>
 
-0.  If you haven't already, set up the bot
+0.  If you haven't already, set up the bot.
 
     <LinkCard title="Getting Started" href="../getting-started"/>
 
-1.  Blacklist everyone
+1.  Blacklist everyone:
 
     <CommandInput command="blacklist add role" options={[
         {
@@ -26,7 +28,7 @@ This guide will teach you how to only allow Moderators to star messages.
         }
     ]}/>
 
-2.  Whitelist your Moderator role
+2.  Whitelist your Moderator role:
 
     This will allow your Moderators to bypass the blacklist.
 
@@ -38,7 +40,7 @@ This guide will teach you how to only allow Moderators to star messages.
         }
     ]}/>
 
-3.  Filter blacklisted members
+3.  Filter blacklisted members:
 
     This will make it so that reactions by blacklisted members won't be counted by Starboard.
 
@@ -63,7 +65,7 @@ This guide will teach you how to only allow Moderators to star messages.
     ]}/>
     </Aside>
 
-4.  (Optional) Remove invalid reactions
+4.  (Optional) Remove invalid reactions:
 
     <Aside type="tip">
          If you wish, you can optionally make Starboard remove invalid reactions, such as reactions from blacklisted members.
