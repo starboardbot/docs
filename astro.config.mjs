@@ -72,6 +72,7 @@ export default defineConfig({
 				},
 			],
 			components: {
+				Pagination: './src/components/starlight/Pagination.astro',
 				Pagination: './src/components/Pagination.astro',
 			},
 			plugins: [starlightLinksValidator()],
