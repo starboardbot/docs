@@ -69,10 +69,15 @@ const currentHost = new URL(Astro.request.url).hostname;
 		border-color: var(--sl-color-gray-2);
 	}
 
+	a span {
+		@apply text-sm sm:text-base sm:leading-[var(--sl-line-height)]
+	}
+
 	.link-title {
 		color: var(--sl-color-white);
 		font-size: var(--sl-text-2xl);
 		line-height: var(--sl-line-height-headings);
+		@apply text-lg sm:text-[length:var(--sl-text-2xl)]
 	}
 
 	svg {

@@ -24,12 +24,12 @@ nav:has(#starlight__on-this-page) ul li {
 
 h1 {
 	font-weight: 700;
-	text-align: center;
+	@apply text-center xl:text-start
 }
 
 
 .sl-markdown-content {
-	@apply md:px-6
+	@apply md:px-6 xl:px-0
 }
 
 .content-panel {
