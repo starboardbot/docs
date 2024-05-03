@@ -2,7 +2,7 @@
 title: Getting Started
 description: Get Starboard set up in your server
 sidebar:
-    order: 0
+    order: 1
 ---
 
 import { Aside, } from '@astrojs/starlight/components';
@@ -21,15 +21,15 @@ Creating a basic starboard configuration is as simple as running a single comman
     }
 ]}/>
 
-This will set your starboard channel to `#starboard`, and use the default settings of 3 stars.
+This will set your starboard channel to `#starboard`, and use the default settings of 3 stars. By default, users can't star their own messages, and their reaction will be removed if they attempt to do so.
 
 ## Main Settings
+Starboard is highly advanced, but has a few main settings that you'll most likely want to change.
 
-Starboard is highly advanced, but has a few main settings that you'll most likely want to change.  Let's take a look at them.
 
 #### Required Stars
 
-The first is `required-stars` which, as the name implies, is the amount of stars a message has to gain before being posted to your starboard channel.
+The first is **Required Stars** which, as the name implies, is the amount of stars a message has to gain before being posted to your starboard channel.
 
 By default, your starboard will require 3 stars.
 
@@ -43,7 +43,7 @@ By default, your starboard will require 3 stars.
 
 #### Emojis
 
-The next is `emojis` which are the emojis that can be used to add stars to messages — a message needs `required-stars` many reactions of these emojis to reach the starboard.
+The next is **Emojis** which are the emojis that can be used to add stars to messages — a message needs [**Required Stars**] many reactions of these emojis to reach the starboard.
 
 <CommandInput command="settings edit main" options={[
     {
@@ -54,6 +54,20 @@ The next is `emojis` which are the emojis that can be used to add stars to messa
 ]}/>
 
 By default, you can have up to 2 emojis.  You can have up to 10 with <ExternalLink type={LinkType.Premium}/>.
+
+#### Self Stars
+
+Lastly, you might want to take a look at **Self Stars**. When disabled, users won't be allowed to star their own messages.
+
+<CommandInput command="settings edit filtering" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'self-stars',
+        value: "False",
+    }
+]}/>
+
+This is disabled by default.
 
 ---
 

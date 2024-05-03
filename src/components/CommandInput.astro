@@ -7,6 +7,7 @@ interface Props {
 export enum OptionType {
     Channel,
     Role,
+    Message,
     String,
     Boolean,
     Number,
@@ -20,13 +21,15 @@ export interface CommandOption {
     highlight?: boolean;
 }
 
-const { command, options } = Astro.props;
+const { command, options = [] } = Astro.props;
 
 const genericHighlightedOption = "text-starboard-600 dark:text-starboard-300";
+export const genericMessageLink = "https://discord.com/channels/12..."
 
 const optionTypeClass: Partial<Record<keyof typeof OptionType, string>> = {
     Channel: genericHighlightedOption,
     Role: genericHighlightedOption,
+    Message: "text-blue-500"
 };
 
 export const mentionableFormat = (
@@ -46,12 +49,11 @@ export const formatChannel = (option: CommandOption) =>
 export const formatRole = (option: CommandOption) =>
     mentionableFormat(option, "@");
 
-export const formatType = (option: CommandOption) => {
-    return option.type === OptionType.Role
-        ? formatRole(option)
-        : option.type === OptionType.Channel
-          ? formatChannel(option)
-          : option.value;
+export const formatType = (option: CommandOption, inCopy: boolean = false) => {
+    return option.type === OptionType.Role ? formatRole(option) :
+        option.type === OptionType.Channel ? formatChannel(option) :
+        option.type === OptionType.Message ? inCopy ? " " : genericMessageLink :
+        option.value;
 };
 ---
 
@@ -111,7 +113,7 @@ export const formatType = (option: CommandOption) => {
             command,
             " ",
             options
-                .map((option) => option.name.concat(":", formatType(option)))
+                .map((option) => option.name.concat(":", formatType(option, true)))
                 .join(" "),
         );
     };

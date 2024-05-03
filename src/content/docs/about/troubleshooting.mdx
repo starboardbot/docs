@@ -1,0 +1,44 @@
+---
+title: Troubleshooting
+description: Figure out why messages aren't being put on the starboard.
+sidebar:
+    order: 2
+---
+
+import { Aside, LinkCard } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+
+There are a few reasons why a message might not be allowed to be put on the starboard, based on your setup.
+
+Make sure you already have the bot set up:
+<LinkCard title="Getting Started" href="../../about/getting-started"/>
+
+
+### Debug
+All you need to do is run the debug command with a link to the message:
+<CommandInput command="mod debug" options={[
+    {
+        name: 'message',
+        type: OptionType.Message,
+    }
+]}/>
+
+If the debug command tells you there's nothing wrong with the message, it should be able to get stars.
+
+If the starred message already has stars and should be on the starboard but isn't, try checking how many stars the message has:
+<CommandInput command="mod info" options={[
+    {
+        name: 'starred-message',
+        type: OptionType.Message,
+    }
+]}/>
+
+If the number of stars the bot says the message has seems to be innacurate, you can try recounting the reactions:
+<CommandInput command="mod recount" options={[
+    {
+        name: 'starred-message',
+        type: OptionType.Message,
+    }
+]}/>
+If the number is still inaccurate, it probably means that the other reactors are bots or are blacklisted.

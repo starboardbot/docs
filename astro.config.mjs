@@ -19,6 +19,11 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
+					label: "About",
+					autogenerate: {
+						directory: '/about/',
+					},
+				},
 					label: 'Guides',
 					autogenerate: {
 						directory: '/guides/',

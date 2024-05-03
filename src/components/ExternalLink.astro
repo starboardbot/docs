@@ -6,6 +6,7 @@ interface Props {
 export enum LinkType {
     Premium = 'premium',
     Support = 'support',
+    Invite = 'invite',
 }
 
 import { links, } from '../config';
@@ -16,8 +17,8 @@ const href = links[type];
 
 ---
 
-<a href={href} target="_blank">{
+<a href={href} target="_blank"><slot>{
     type === LinkType.Premium ? 'Starboard Premium'
     : type === LinkType.Support ? 'Support Server'
     : '???'
-}</a>
+}</slot></a>
