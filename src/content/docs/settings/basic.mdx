@@ -9,7 +9,7 @@ import { Aside, } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
 import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
 
-You can view all the settings starboard has to offer with the following command:
+You can view all the settings Starboard has to offer with the following command:
 <CommandInput command="settings view" />
 The command to change a setting will be found in the corresponding category the setting is listed in.
 For example, the command to change **Self Stars** (found in the Filtering category), is  `/settings edit filtering`.
@@ -49,7 +49,7 @@ By default, your starboard will require 3 stars.
 
 ### Required Stars To Remove
 
-Alongside the previous setting, **Required Stars To Remove** dictates the amount of stars a starboard message must fall to before being removed from the starboard.
+Alongside the previous setting, **Required Stars To Remove** dictates the number of stars a starboard message must fall to before being removed from the starboard.
 
 <CommandInput command="settings edit main" options={[
     {
@@ -105,10 +105,10 @@ As the name implies, enabling this setting causes invalid reactions to be remove
 Invalid reactions include:
 - reacting on your own message when **Self Stars** is disabled
 - reactions by blacklisted users
-- reacting on a message sent by a user that is blacklisted
+- reacting to a message sent by a user that is blacklisted
 - reacting on a bot's message when **Filter Bots** is enabled
 - reactions in a blacklisted channel
-- reacting on a message that doesn't pass message filters
+- reacting to a message that doesn't pass message filters
 
 This is enabled by default.
 

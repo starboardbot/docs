@@ -9,7 +9,7 @@ import { Aside, } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
 import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
 
-You can view all the settings starboard has to offer with the following command:
+You can view all the settings Starboard has to offer with the following command:
 <CommandInput command="settings view" />
 The command to change a setting will be found in the corresponding category the setting is listed in.
 For example, the command to change **Sync Message Edits** (found in the Miscellaneous category), is  `/settings edit misc`.
@@ -23,9 +23,9 @@ You can blacklist users so they can't star messages or have their messages on th
 This setting modifies this behaviour regarding blacklisted users.
 
 You have 3 options:
-- filter blacklisted authors, meaning no-one can star messages sent by blacklisted users
+- filter blacklisted authors, meaning no one can star messages sent by blacklisted users
 - filter blacklisted reactors, meaning blacklisted users can't star messages by anyone
-- filter both blacklisted authors & reactors, meaning blacklisted users can't star messages or have their messages on the starboard. This is default behaviour.
+- filter both blacklisted authors & reactors, meaning blacklisted users can't star messages or have their messages on the starboard. This is the default behaviour.
 
 To change this behaviour, edit the **Filter Blacklisted Users** setting.
 
@@ -39,7 +39,7 @@ To change this behaviour, edit the **Filter Blacklisted Users** setting.
 
 ### Starboard React
 
-By default, the bot reacts to every starboard message it posts, to offer users a shortcut — users can either react on the starboard message to add a star, or go and find the original message to add a star. This is recommended behaviour.
+By default, the bot reacts to every starboard message it posts, to offer users a shortcut — users can either react to the starboard message to add a star, or go and find the original message to add a star. This is recommended behaviour.
 
 To change this behaviour, edit the **Starboard React** setting.
 
@@ -53,7 +53,7 @@ To change this behaviour, edit the **Starboard React** setting.
 
 ### Sync Message Deletes
 
-When this setting is enabled, if a message that has reposted to the starboard gets deleted, its corresponding starboard message will be deleted also.
+When this setting is enabled, if a message that has been reposted to the starboard gets deleted, its corresponding starboard message will be deleted also.
 
 <CommandInput command="settings edit misc" options={[
     {
