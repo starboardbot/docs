@@ -24,9 +24,16 @@ export default defineConfig({
 						directory: '/about/',
 					},
 				},
+				{
 					label: 'Guides',
 					autogenerate: {
 						directory: '/guides/',
+					},
+				},
+				{
+					label: "Settings",
+					autogenerate: {
+						directory: '/settings/',
 					},
 				},
 				{

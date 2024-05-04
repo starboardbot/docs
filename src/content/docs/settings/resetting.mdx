@@ -1,0 +1,42 @@
+---
+title: Resetting Settings
+description: Learn how to reset settings.
+sidebar:
+    order: 3
+---
+
+import { Aside, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+
+You can view all the settings starboard has to offer with the following command:
+<CommandInput command="settings view" />
+
+If you want a fresh start for your server, you can run the following command to fully reset your server's settings:
+<CommandInput command="settings reset" options={[
+    {
+        type: OptionType.String,
+        name: 'settings',
+        value: 'Server Settings',
+    }
+]} />
+
+If you just want to reset a singular setting back to its defaults, you can specify that setting to reset:
+<CommandInput command="settings reset" options={[
+    {
+        type: OptionType.String,
+        name: 'settings',
+        value: 'Server Settings',
+    },
+    {
+        type: OptionType.String,
+        name: 'setting',
+        value: 'Emojis',
+    },
+]} />
+
+---
+
+<Aside type="tip">
+    If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
+</Aside>

@@ -1,0 +1,106 @@
+---
+title: Advanced Settings
+description: Get an overview of more advanced Starboard settings.
+sidebar:
+    order: 1
+---
+
+import { Aside, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+
+You can view all the settings starboard has to offer with the following command:
+<CommandInput command="settings view" />
+The command to change a setting will be found in the corresponding category the setting is listed in.
+For example, the command to change **Sync Message Edits** (found in the Miscellaneous category), is  `/settings edit misc`.
+
+Starboard has a few more advanced settings that you can customise.
+
+
+### Filter Blacklisted Users
+
+You can blacklist users so they can't star messages or have their messages on the starboard.
+This setting modifies this behaviour regarding blacklisted users.
+
+You have 3 options:
+- filter blacklisted authors, meaning no-one can star messages sent by blacklisted users
+- filter blacklisted reactors, meaning blacklisted users can't star messages by anyone
+- filter both blacklisted authors & reactors, meaning blacklisted users can't star messages or have their messages on the starboard. This is default behaviour.
+
+To change this behaviour, edit the **Filter Blacklisted Users** setting.
+
+<CommandInput command="settings edit filtering" options={[
+    {
+        type: OptionType.String,
+        name: 'filter-blacklisted-users',
+        value: "Filter Both (Reactors & Message Authors)",
+    }
+]}/>
+
+### Starboard React
+
+By default, the bot reacts to every starboard message it posts, to offer users a shortcut — users can either react on the starboard message to add a star, or go and find the original message to add a star. This is recommended behaviour.
+
+To change this behaviour, edit the **Starboard React** setting.
+
+<CommandInput command="settings edit misc" options={[
+    {
+        type: OptionType.String,
+        name: 'starboard-react',
+        value: "Upvote & Downvote Emojis",
+    }
+]}/>
+
+### Sync Message Deletes
+
+When this setting is enabled, if a message that has reposted to the starboard gets deleted, its corresponding starboard message will be deleted also.
+
+<CommandInput command="settings edit misc" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'sync-message-deletes',
+        value: 'False',
+    }
+]}/>
+
+This is disabled by default.
+
+### Sync Message Edits
+
+When this setting is enabled, starboard messages will be updated whenever the original message is edited, to match the content.
+
+<CommandInput command="settings edit misc" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'sync-message-edits',
+        value: 'True',
+    }
+]}/>
+
+This is disabled by default.
+
+### When Deleted
+
+This setting gives you the option to dictate what happens when a starboard message is deleted.
+
+You have 4 options:
+- do nothing - users can star the message again to get it back on the starboard
+- repost the starboard message immediately
+- freeze the starred message so it can't get any more stars
+- trash (and freeze) the starred message
+
+<CommandInput command="settings edit misc" options={[
+    {
+        type: OptionType.String,
+        name: 'when-deleted',
+        value: "Do Nothing",
+    }
+]}/>
+
+By default, nothing happens when a starboard message is deleted.
+
+---
+
+<Aside type="tip">
+    If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
+</Aside>

@@ -1,0 +1,264 @@
+---
+title: Customising The Starboard Message
+description: Learn all the different ways you can customise the starboard message.
+sidebar:
+    order: 4
+---
+
+import { Image } from 'astro:assets';
+import { Aside, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+import mentionAuthorExample from "../../../assets/mention-author-example.png";
+import longMessageExample from "../../../assets/long-message-example.png";
+import longStarboardMessageExample from "../../../assets/long-starboard-message-example.png";
+import maxContentDisplayedExample from "../../../assets/max-content-displayed-example.png";
+import maxEmbedsDisplayedExample from "../../../assets/max-embeds-displayed-example.png";
+import maxMediaDisplayedExample from "../../../assets/max-media-displayed-example.png";
+import useLinksOverButtonsExamples from "../../../assets/use-links-over-buttons-examples.png";
+import messageJumpLinkExamples from "../../../assets/message-jump-link-examples.png";
+import displayRepliedMessageExamples from "../../../assets/display-replied-message-examples.png";
+import reuploadAttachmentsExamples from "../../../assets/reupload-attachments-examples.png";
+
+
+Starboard offers many ways to customise the starboard message.
+
+You can view all the basic appearance settings starboard has to offer with the following command:
+<CommandInput command="settings view" />
+The command to change a setting will be found in the corresponding category the setting is listed in.
+For example, the command to change **Reupload Attachments** (found in the Appearance category), is  `/settings edit appearance`.
+
+## Display Tiers
+
+The main way you can customise messages is by changing the cosmetic star displayed beside the star count, and the colour of the starboard message's embeds.
+You can do this via **Display Tiers**.
+<CommandInput command="displaytiers create" options={[
+    {
+        type: OptionType.Number,
+        name: 'treshold',
+        value: '10',
+    },
+    {
+        type: OptionType.String,
+        name: 'star',
+        value: '✨',
+    },
+    {
+        type: OptionType.String,
+        name: 'colour',
+        value: '#ecd558 / rgb(236, 213, 88)',
+    },
+]}/>
+
+Your server already has 4 display tiers created for you by default:
+1. ⭐ `#eee2a0` from 0 stars
+2. 🌟 `#f0dd76` from **10** stars
+3. 💫 `#ecd558` from **20** stars
+4. ✨ `#ecc014` from **30** stars
+
+Of course, you can edit the default display tiers:
+<CommandInput command="displaytiers edit" options={[
+    {
+        type: OptionType.Number,
+        name: 'tier',
+        value: '1',
+    },
+    {
+        type: OptionType.String,
+        name: 'star',
+        value: '🍣',
+    },
+]}/>
+
+Display tiers are applied one after the other, and allow you to set the star/colour depending on how many stars the message has.
+For example, let's say you have display tiers set up as follows:
+1. ⭐ `#eee2a0` from 0 stars
+2. 💫 `#ecd558` from **2** stars
+3. `#ecc014` from **3** stars
+4. ✨ from **5** stars
+
+In this scenario, the starboard message will change based on how many stars the starred message has:
+1. ⭐ `#eee2a0`
+2. 💫 `#ecd558`
+3. 💫 `#ecc014`
+4. 💫 `#ecc014`
+5. ✨ `#ecc014`
+
+
+## Basic Settings
+
+There are also a wide range of settings for customisation the starboard message, found in the **Appearance** category.
+
+### Name Display
+
+The **Name Display** setting controls how the starred message author's name should be displayed on starboard messages. It also has an effect on which avatar is used.
+
+There are 3 options:
+- Server Nickname (also uses server avatar, if any)
+- Display Name (also uses server avatar, if any)
+- Username (uses global avatar)
+
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.String,
+        name: 'name-display',
+        value: "Server Nickname",
+    }
+]}/>
+
+### Mention Author
+
+If you want users to be mentioned on their starboard messages, enable the **Mention Author** setting.
+
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'mention-author',
+        value: 'True',
+    }
+]}/>
+<Image class="rounded-xl shadow-lg" src={mentionAuthorExample} alt="Image showing what enabling the Mention Author setting looks like." />
+
+This is disabled by default.
+
+
+### Display Avatar
+
+The **Display Avatar** setting determines whether or not user avatars are displayed on starboard messages.
+
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'display-avatar',
+        value: 'False',
+    }
+]}/>
+
+This is enabled by default.
+
+### Display Replied Message
+
+If a message that's a reply to another message gets starred, a snippet of the message that was replied to is shown on the starboard message, for context.
+This behaviour is controlled by the **Display Replied Message** setting.
+
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'display-replied-message',
+        value: 'True',
+    }
+]}/>
+<Image class="rounded-xl shadow-lg" src={displayRepliedMessageExamples} alt="Image showing how the snippet of the message that was replied to looks like." />
+
+This is enabled by default.
+
+### Reupload Attachments
+
+Bots cannot display videos in embeds, so they are displayed as links instead.
+However, you're given the option to have the bot download videos, files, and extra attachments, and reupload them on the starboard message so users can easily view them there.
+
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.String,
+        name: 'reupload-attachments',
+        value: "True",
+    }
+]}/>
+<Image class="rounded-xl shadow-lg" src={reuploadAttachmentsExamples} alt="Image showing what enabling the Reupload Attachments setting looks like." />
+
+<Aside type="note">
+    Bots can only upload files as large as the server boost level's file size limit.
+</Aside>
+
+### Message Jump Link
+
+The **Message Jump Link** setting determines how the original message is linked on the starboard messages so people can find it.
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.String,
+        name: 'message-jump-link',
+        value: 'Mention Link',
+    }
+]}/>
+<Image class="rounded-xl shadow-lg" src={messageJumpLinkExamples} alt="Image showing what the different options for Message Jump Link look like." />
+
+
+### Use Links Over Buttons
+
+For files and links, the bot will list them either as text links or as button links, depending on the value of the **Use Links Over Buttons** setting.
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'use-links-over-buttons',
+        value: 'False',
+    }
+]}/>
+<Image class="rounded-xl shadow-lg" src={useLinksOverButtonsExamples} alt="Image showing what enabling the Use Links Over Buttons setting looks like." />
+<Aside type="caution">
+    Text links are more limiting than button links, and the bot might not be able to list as many links in text as it could with buttons.
+</Aside>
+
+The bot uses buttons for links by default.
+
+## Size Limits
+
+There are 4 simple appearance settings that limit the size of starboard messages.
+Here's an example of a long message:
+<div class="relative lg:mb-24">
+    <Image class="rounded-xl shadow-lg" src={longMessageExample} alt="A screenshot of a super long message with several attachments." />
+    <Image class="rounded-xl shadow-lg lg:absolute right-3 -bottom-24" src={longStarboardMessageExample} alt="A screenshot of a super long starboard message with several attachments." />
+</div>
+
+
+### Max Content Displayed
+This is the maximum number of characters of the original message's content to display on starboard messages. Any extra characters will be truncated.
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.Number,
+        name: 'max-content-displayed',
+        value: '200',
+    }
+]}/>
+<Image class="rounded-xl shadow-lg" src={maxContentDisplayedExample} alt="Image showing the long starboard message with Max Content Displayed set to 200." />
+
+### Max Embeds Displayed
+This is the maximum number of embeds the bot is allowed to use to display a single starboard message.
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.Number,
+        name: 'max-embeds-displayed',
+        value: '2',
+    }
+]}/>
+<Image class="rounded-xl shadow-lg" src={maxEmbedsDisplayedExample} alt="Image showing the long starboard message with Max Embeds Displayed set to 2." />
+In the above image, only 2 embeds are used and the remaining content is linked.
+
+### Max Media Displayed
+This is the maximum number of images/videos/files the bot is allowed to display, the rest being linked.
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.Number,
+        name: 'max-media-displayed',
+        value: '1',
+    }
+]}/>
+<Image class="rounded-xl shadow-lg" src={maxMediaDisplayedExample} alt="Image showing the long starboard message with Max Media Displayed set to 3." />
+In the above image, only 1 image was embedded, the remaining were linked instead.
+
+### Max Overall Message Length
+This is the maximum number of characters that is allowed to be displayed on the starboard message in total. This truncates all of the message's content, including replied message content and text embed content.
+This setting is very similar to Max Content Displayed.
+<CommandInput command="settings edit appearance" options={[
+    {
+        type: OptionType.Number,
+        name: 'max-overall-message-length',
+        value: '1000',
+    }
+]}/>
+
+
+---
+
+<Aside type="tip">
+    If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
+</Aside>

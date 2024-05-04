@@ -1,0 +1,119 @@
+---
+title: Basic Settings
+description: Get an overview of basic Starboard settings.
+sidebar:
+    order: 0
+---
+
+import { Aside, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+
+You can view all the settings starboard has to offer with the following command:
+<CommandInput command="settings view" />
+The command to change a setting will be found in the corresponding category the setting is listed in.
+For example, the command to change **Self Stars** (found in the Filtering category), is  `/settings edit filtering`.
+
+Try having a look through all the `/settings edit` sub-commands and their options to quickly find settings you might want to set.
+Starboard has a few basic settings that you'll most likely want to know about:
+
+
+### Starboard
+
+**Starboard** is the most important setting — this is where all starred messages go.
+
+<CommandInput command="settings edit main" options={[
+    {
+        type: OptionType.Channel,
+        name: 'starboard',
+        value: 'starboard',
+    }
+]}/>
+<Aside type="tip">
+    The bot will not listen to messages for reactions if there's no starboard channel set.
+</Aside>
+
+### Required Stars
+
+**Required Stars**, as the name implies, is the amount of stars a message has to gain before being posted to your starboard channel.
+
+<CommandInput command="settings edit main" options={[
+    {
+        type: OptionType.Number,
+        name: 'required-stars',
+        value: 5,
+    }
+]}/>
+
+By default, your starboard will require 3 stars.
+
+### Required Stars To Remove
+
+Alongside the previous setting, **Required Stars To Remove** dictates the amount of stars a starboard message must fall to before being removed from the starboard.
+
+<CommandInput command="settings edit main" options={[
+    {
+        type: OptionType.Number,
+        name: 'required-stars-to-remove',
+        value: 3,
+    }
+]}/>
+
+By default, messages will be removed if they fall to 2 stars.
+
+
+### Emojis
+
+The **Emojis** setting is the emojis that can be used to add stars to messages — a message needs [**Required Stars**] many reactions of these emojis to reach the starboard.
+
+<CommandInput command="settings edit main" options={[
+    {
+        type: OptionType.String,
+        name: 'emojis',
+        value: '⭐ 🍣',
+    }
+]}/>
+
+By default, you can have up to 2 emojis.  You can have up to 10 with <ExternalLink type={LinkType.Premium}/>.
+
+### Self Stars
+
+When **Self Stars** is disabled, users won't be allowed to star their own messages.
+
+<CommandInput command="settings edit filtering" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'self-stars',
+        value: "False",
+    }
+]}/>
+
+This is disabled by default.
+
+### Remove Invalid Reactions
+
+As the name implies, enabling this setting causes invalid reactions to be removed, instead of just being ignored.
+
+<CommandInput command="settings edit filtering" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'remove-invalid-reactions',
+        value: "False",
+    }
+]}/>
+
+Invalid reactions include:
+- reacting on your own message when **Self Stars** is disabled
+- reactions by blacklisted users
+- reacting on a message sent by a user that is blacklisted
+- reacting on a bot's message when **Filter Bots** is enabled
+- reactions in a blacklisted channel
+- reacting on a message that doesn't pass message filters
+
+This is enabled by default.
+
+---
+
+<Aside type="tip">
+    If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
+</Aside>
