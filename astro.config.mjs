@@ -63,6 +63,10 @@ export default defineConfig({
 							label: 'Starboard Premium',
 							link: links.premium,
 						},
+						{
+							label: 'Invite Starboard',
+							link: links.invite,
+						},
 					],
 				}
 			],
