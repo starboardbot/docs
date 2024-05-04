@@ -90,4 +90,7 @@ export default defineConfig({
 		}),
 		tailwind({ applyBaseStyles: false }),
 	],
+	redirects: {
+		'/guides/getting-started': '/docs/about/getting-started',
+	},
 });
