@@ -63,6 +63,10 @@ export default defineConfig({
 							label: 'Starboard Premium',
 							link: links.premium,
 						},
+						{
+							label: 'Invite Starboard',
+							link: links.invite,
+						},
 					],
 				}
 			],
@@ -90,4 +94,7 @@ export default defineConfig({
 		}),
 		tailwind({ applyBaseStyles: false }),
 	],
+	redirects: {
+		'/guides/getting-started': '/docs/about/getting-started',
+	},
 });

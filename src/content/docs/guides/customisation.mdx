@@ -6,7 +6,7 @@ sidebar:
 ---
 
 import { Image } from 'astro:assets';
-import { Aside, Steps } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
 import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
 import mentionAuthorExample from "../../../assets/mention-author-example.png";
@@ -23,7 +23,7 @@ import reuploadAttachmentsExamples from "../../../assets/reupload-attachments-ex
 
 Starboard offers many ways to customise the starboard message.
 
-You can view all the basic appearance settings starboard has to offer with the following command:
+You can view all the basic appearance settings Starboard has to offer with the following command:
 <CommandInput command="settings view" />
 The command to change a setting will be found in the corresponding category the setting is listed in.
 For example, the command to change **Reupload Attachments** (found in the Appearance category), is  `/settings edit appearance`.
@@ -35,7 +35,7 @@ You can do this via **Display Tiers**.
 <CommandInput command="displaytiers create" options={[
     {
         type: OptionType.Number,
-        name: 'treshold',
+        name: 'threshold',
         value: '10',
     },
     {
@@ -87,7 +87,7 @@ In this scenario, the starboard message will change based on how many stars the 
 
 ## Basic Settings
 
-There are also a wide range of settings for customisation the starboard message, found in the **Appearance** category.
+There are also a wide range of settings for customisation of the starboard message, found in the **Appearance** category.
 
 ### Name Display
 
@@ -246,7 +246,7 @@ This is the maximum number of images/videos/files the bot is allowed to display,
 In the above image, only 1 image was embedded, the remaining were linked instead.
 
 ### Max Overall Message Length
-This is the maximum number of characters that is allowed to be displayed on the starboard message in total. This truncates all of the message's content, including replied message content and text embed content.
+This is the maximum number of characters that are allowed to be displayed on the starboard message in total. This truncates all of the message's content, including replied message content and text embed content.
 This setting is very similar to Max Content Displayed.
 <CommandInput command="settings edit appearance" options={[
     {
