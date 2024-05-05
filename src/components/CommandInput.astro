@@ -67,8 +67,8 @@ export const formatType = (option: CommandOption, inCopy: boolean = false) => {
             options.map((option) => (
                 <span
                     id="option"
-                    class="w-fit ring-1 ring-starboard-900 dark:ring-starboard-500/60 rounded-md overflow-hidden flex items-center"
-                    class:list={option.highlight ? "ring-2 ring-starboard-400 dark:ring-starboard-400" : ""}
+                    class="w-fit rounded-md overflow-hidden flex items-center"
+                    class:list={option.highlight ? "ring-2 ring-starboard-400 dark:ring-starboard-400" : "ring-1 ring-starboard-900 dark:ring-starboard-500/60"}
                 >
                     <span class="bg-neutral-200 dark:bg-neutral-700 px-3 self-stretch flex items-center">
                         {option.name}
