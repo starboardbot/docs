@@ -1,0 +1,115 @@
+---
+title: Advanced Overrides
+description: Learn about more advanced concepts to do with overrides
+sidebar:
+    order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+
+More ambitious users might wish to create more complicated setups with their overrides.
+This guide will walk you through the different, more advanced concepts to do with overrides.
+
+## Multiple Overrides
+When you have multiple overrides that can apply at a time, you may wonder which way they'll be applied.
+<Aside>
+    Although multiple different overrides can apply to the same channel, role, or emoji, a message can only be posted to one starboard channel at a time.
+    Overrides that have the **Starboard** setting set will simply override other **Starboard** setting values.
+</Aside>
+
+**The overrides that are applied last are the most prioritied as their settings and modifications are kept.** The overrides that are applied first may have modifications overridden by the next override.
+
+Overrides are applied as follows:
+1. **custom priority value** - overrides with higher priority values are applied last
+2. if the custom priority values are the same, then the **override type** is checked:
+    1. Channel-type based overrides are applied first,
+    2. Then channel based overrides,
+    3. Then role based overrides,
+    4. And lastly, emoji based overrides are applied.
+3. if the types are the same, then the **creation date** is checked. Newer overrides are applied last.
+
+You can give overrides custom priority values with the `priority` option:
+<CommandInput command="overrides create channel" options={[
+    {
+        type: OptionType.String,
+        name: 'name',
+        value: 'My prioritised override',
+    },
+    {
+        type: OptionType.Channel,
+        name: 'channels',
+        value: 'channel-1 channel-2',
+        multiple: true,
+    },
+    {
+        type: OptionType.Number,
+        name: 'priority',
+        value: '10',
+        highlight: true,
+    },
+]}/>
+Overrides have a default custom priority value of 0.
+
+### Example Setup
+Let's say you have the following setup:
+- "Channel Override (A)" for `#channel-1`, `#channel-2` with priority value 1
+- "Role Override (B)" for `@Role 1`
+- "Channel Override 2 (C)" for `#channel-1`
+- "Role Override 2 (D)" from `@Role 1`, `@Role 2`
+- "Channel Override 3 (E)" for `#channel-2` with priority value 2
+- "ChannelType Override (F)" for all text/announcement channels
+
+If a message is starred in `#channel-1` sent by a user with just the `@Role 1` role, the following overrides will be applied in the following order:
+1. "ChannelType Override (F)" (due to override type),
+1. then "Channel Override 2 (C)", (due to override type)
+1. then "Role Override (B)", (due to override type)
+1. then "Role Override 2 (D)", (due to override type, created after previous role override)
+1. then lastly "Channel Override (A)". (due to custom priority value of 1)
+
+If a message is starred in `#channel-2` sent by a user with just the `@Role 1` role, the following overrides will be applied in the following order:
+1. "ChannelType Override (F)" (due to override type),
+1. then "Role Override (B)", (due to override type)
+1. then "Role Override 2 (D)", (due to override type, created after previous role override)
+1. then "Channel Override (A)", (due to custom priority value of 1)
+1. then lastly "Channel Override 3 (E)" (due to custom priority value of 2)
+
+
+## Inheriting From Other Overrides
+By default, overrides inherit from the server settings. You can make an override inherit from other overrides instead, incase you have a big override with a lot of modifications made, and you want to copy those modifications to another override.
+
+If an override inherits from another override, and multiple overrides are made (like in the scenarios above), all the override-specific inherited modifications are applied before the next overrides, then finally the server settings.
+
+Say if you have the following setup:
+- "Channel Override (A)" for `#channel-1`
+- "Channel Override 2 (B)" for `#channel-1`, `#channel-2`
+- "Role Override (C)" for `@Role 1` that inherits from "Channel Override (A)"
+- "Role Override 2 (D)" from `@Role 1`, `@Role 2`
+
+If a message is starred in `#channel-2` sent by a user with just the `@Role 1` role, settings will be set in the following order:
+1. the server settings, as the base
+1. the settings of "Channel Override (A)"
+1. then the settings of "Channel Override 2 (B)"
+1. then the settings of "Role Override (C)", *after* the settings of "Channel Override (A)" (again)
+1. lastly, the settings of "Role Override 2 (D)"
+
+You can make overrides inherit from other overrides with the `inherit-from` option:
+<CommandInput command="overrides create channel" options={[
+    {
+        type: OptionType.String,
+        name: 'name',
+        value: 'My inherited override',
+    },
+    {
+        type: OptionType.Channel,
+        name: 'channels',
+        value: 'channel-1 channel-2',
+        multiple: true,
+    },
+    {
+        type: OptionType.String,
+        name: 'inherit-from',
+        value: 'Some override with a LOT of changed settings',
+        highlight: true,
+    },
+]}/>

@@ -1,0 +1,51 @@
+---
+title: Multiple Starboard Channels
+description: Learn how to set up different starboard channels in your server.
+sidebar:
+    order: 5
+---
+
+import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+
+This guide will teach you how to set up different starboard channels in your server.
+
+### The Starboard Setting
+In this bot, the starboard that messages are sent to is merely just a setting - the **Starboard** setting.
+
+It's easily configurable, meaning you can easily change the setting without affecting something else or messing anything up. The setting only determines which channel a message gets sent to when it needs to be posted.
+
+Because it's just a setting, that means it can be overridden by **overrides**.
+<Aside type="note">
+    Because it's just a setting, a message can only be posted to one starboard channel at a time.
+</Aside>
+
+### Overrides
+Overrides are used to change specific settings depending on the context, such as the channel of the message, the roles the author has or the emoji used to star the message.
+
+You can read all about overrides here:
+<LinkCard title="Overrides" href="../../overrides/overview" />
+
+## Multiple Starboards
+There are 3 ways for you to set up multiple starboard channels in your server.
+
+### Channel-Based Starboards
+You can set up your server so messages go to one starboard channel, but in a select few channels messages go to another starboard channel. You can view an example of this here:
+<LinkCard title="Channel-Based Overrides" href="../../overrides/overview" />
+You can also set up your server so messages go to one starboard channel, but messages from a certain *type* of channel (e.g. voice channels or age-restricted channels) go to another starboard channel. You can view an example of this here:
+<LinkCard title="Age Restricted Starboard" href="../age-restricted-starboard" />
+
+### Role-Based Starboards
+You can set up your server so messages go to one starboard channel, but messages by users who have a certain role go to another starboard channel. You can view an example of this here:
+<LinkCard title="Role-Based Overrides" href="../../overrides/role-based" />
+
+### Emoji-Based Starboards
+You can set up your server so messages go to one starboard channel, but reacting with a certain emoji sends the message to another starboard channel. You can view several examples of this here:
+<LinkCard title="Emoji-Based Overrides" href="../../overrides/emoji-based#examples" />
+
+---
+
+<Aside type="tip">
+    If you ever get stuck, you can ask for help in the <ExternalLink type={LinkType.Support}/>.
+</Aside>

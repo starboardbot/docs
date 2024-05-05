@@ -1,0 +1,338 @@
+---
+title: Emoji-Based Overrides
+description: Learn how to create emoji-based overrides
+sidebar:
+    order: 13
+---
+
+import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+
+Emoji-based overrides are useful when you want to change specific settings based on the emoji used to star or downvote the message.
+<Aside type="caution">
+    Emoji-based overrides are applied when specific emojis are used to star/downvote messages.
+    If a reaction emoji is not listed as a starring emoji nor a downvote emoji for the message being starred, then the reaction is ignored (and this override isn't applied, obviously).
+</Aside>
+{/* Emoji-based overrides are the most complicated type of override, and exist to offer ambitious users the ability to create advanced setups. */}
+
+While starring messages, the emoji overrides of the emoji currently being reacted with is used, and overrides are applied as normal.
+This is for checking blacklists, filters, self stars, and other filter-based settings.
+
+However, when it comes to posting messages to the starboard (figuring out which settings to use for the starboard, the required amount, and appearance based settings), these type of overrides have different rules for being applied.
+See <a href="#posting-messages">Posting Messages</a> for more information.
+<Aside type="note">
+    A message can only be posted to one starboard channel at a time.
+</Aside>
+
+
+### Required Stars
+The **Required Stars** setting has a slightly different function when working with emoji-based overrides. For emoji-based overrides, **Required Stars** also determines when the override is applied, when posting messages.
+If set, while posting messages, the override will only apply once it has **Required Stars** many reactions of the emojis the override applies to.
+
+So, if an override applies to 🍣 and has **Required Stars** set to 2, the message can have as many ⭐ reactions but once it gets 2 🍣 reactions, then that override is applied for posting the message.
+
+This means you can have a normal starboard, then an override that changes the starboard to `#sushi` when the message gets 2 🍣 reactions.
+
+### Counting Stars
+Note that emoji overrides don't change the way stars are counted. All emojis that can be used to star the message will be counted.
+
+So, if your server settings are set up to use the emojis ⭐ 🍣 to star messages, but you have an override for 🍣, stars for ⭐ will still be counted and the total count will be displayed.
+
+
+## Examples
+### Scenario 1: Skullboard
+
+You have a default starboard channel `#starboard` that messages go to after 3 ⭐ but you want messages to go to a separate starboard channel `#skullboard` after 3 💀.
+
+<Steps>
+
+1. The first thing you need to do is add 💀 as one of the emojis used to star messages:
+
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'emojis',
+            value: '⭐ 💀',
+        },
+    ]}/>
+
+    <Aside type="caution">
+        If you have other overrides that modify and override the **Emojis** setting, make sure you change those as well.
+
+        For example, if you have ⭐ as the server emoji, but an override for `#general` that sets the emoji to 🍣, this skullboard override won't work for messages in `#general` as the **Emoji** setting there has been overridden and doesn't include 💀.
+    </Aside>
+
+2. Then, create an override for the 💀 emoji:
+
+    <CommandInput command="overrides create emoji" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'Skullboard',
+        },
+        {
+            type: OptionType.String,
+            name: 'emojis',
+            value: '💀',
+        },
+    ]}/>
+
+    <Aside type="tip">
+        If you want this emoji-based override to only apply in a set of channels and not in all channels, you can provide a list of channels:
+        <CommandInput command="overrides create role" options={[
+            {
+                type: OptionType.String,
+                name: 'name',
+                value: 'Skullboard',
+            },
+            {
+                type: OptionType.String,
+                name: 'emojis',
+                value: '💀',
+            },
+            {
+                type: OptionType.Channel,
+                name: 'channels',
+                value: 'general memes videos',
+                multiple: true,
+                highlight: true,
+            }
+        ]}/>
+    </Aside>
+
+3.  Next, you'll need to change the settings for the override you've just created:
+
+    You need to set the new starboard, and you have to set required stars so the override only applies after 3 💀 reactions.
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Skullboard',
+        },
+        {
+            type: OptionType.Channel,
+            name: 'starboard',
+            value: 'skullboard',
+        },
+        {
+            type: OptionType.Number,
+            name: 'required-stars',
+            value: 3,
+        },
+    ]}/>
+
+</Steps>
+
+That's it! Now, messages will be sent to `#skullboard` once they get 3 💀 reactions.
+
+
+### Scenario 2: Starboard Levels
+
+You have a starboard channel `#starboard` that messages go to after 3 ⭐ but you want the best starred messages to go to a separate starboard channel `#bestboard` after they get 20 ⭐.
+
+You'll achieve this by creating an emoji override for ⭐ that's only applied after 20 reactions, that changes the **Starboard** setting.
+
+<Steps>
+
+1. The first thing you need to do is create an override for the ⭐ emoji:
+
+    <CommandInput command="overrides create emoji" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'Superboard',
+        },
+        {
+            type: OptionType.String,
+            name: 'emojis',
+            value: '⭐',
+        },
+    ]}/>
+
+    <Aside type="tip">
+        If you want this emoji-based override to only apply in a set of channels and not in all channels, you can provide a list of channels:
+        <CommandInput command="overrides create role" options={[
+            {
+                type: OptionType.String,
+                name: 'name',
+                value: 'Superboard',
+            },
+            {
+                type: OptionType.String,
+                name: 'emojis',
+                value: '⭐',
+            },
+            {
+                type: OptionType.Channel,
+                name: 'channels',
+                value: 'general memes videos',
+                multiple: true,
+                highlight: true,
+            }
+        ]}/>
+    </Aside>
+
+2.  Next, you'll need to change the settings for the override you've just created:
+
+    You need to set the new starboard, and you have to set required stars so the override only applies after 20 ⭐ reactions.
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Superboard',
+        },
+        {
+            type: OptionType.Channel,
+            name: 'starboard',
+            value: 'superboard',
+        },
+        {
+            type: OptionType.Number,
+            name: 'required-stars',
+            value: 20,
+        },
+    ]}/>
+
+</Steps>
+
+That's it! Now, messages will be moved from `#starboard` to `#superboard` once they get 20 ⭐ reactions.
+
+### Scenario 3: Staff Pins
+
+You have a default starboard channel `#starboard` that messages go to after 5 ⭐ but you want messages to go to a separate starboard channel `#staff-pins` after 2 📌 from moderators.
+
+<Steps>
+
+1. The first thing you need to do is add 📌 as one of the emojis used to star messages:
+
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'emojis',
+            value: '⭐ 📌',
+        },
+    ]}/>
+
+2. Then, create an override for the 📌 emoji:
+
+    <CommandInput command="overrides create emoji" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'Staff Pins',
+        },
+        {
+            type: OptionType.String,
+            name: 'emojis',
+            value: '📌',
+        },
+    ]}/>
+
+3.  Next, you'll need to change the settings for the override you've just created:
+
+    You need to set the new starboard, and you have to set required stars so the override only applies after 2 📌 reactions.
+    <CommandInput command="settings edit main" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Staff Pins',
+        },
+        {
+            type: OptionType.Channel,
+            name: 'starboard',
+            value: 'staff-pins',
+        },
+        {
+            type: OptionType.Number,
+            name: 'required-stars',
+            value: 2,
+        },
+    ]}/>
+
+4. Lastly, make it so that only moderators can react with the 📌 emoji:
+
+    You will do this by modifying the blacklist on the override.
+
+    <CommandInput command="blacklist add role" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Staff Pins',
+        },
+        {
+            type: OptionType.Role,
+            name: 'role',
+            value: 'everyone',
+        },
+    ]}/>
+    <CommandInput command="whitelist add role" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Staff Pins',
+        },
+        {
+            type: OptionType.Role,
+            name: 'role',
+            value: 'Staff',
+        },
+    ]}/>
+
+    We also need to make it so that for this override, only reactions by blacklisted users are filtered, not messages by blacklisted users.
+    <CommandInput command="settings edit filtering" options={[
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Staff Pins',
+        },
+        {
+            type: OptionType.String,
+            name: 'filter-blacklisted-users',
+            value: 'Filter Reactors',
+        }
+    ]}/>
+
+</Steps>
+
+That's it! Now, messages will be moved to `#staff-pins` if they get 2 📌 reactions from moderators with the `@Staff` role.
+
+---
+
+## Further Reading
+Below is a more in-depth explanation of how emoji-based overrides function.
+
+### Posting Messages
+When it's time to post the message, the bot goes through the starred message's reactions to see which emoji overrides should be used. This is for checking required stars, customising the starboard message, and getting the starboard the message will be posted to.
+
+Overrides are applied a little differently when emoji-based overrides are involved - they're applied as follows:
+1. **custom priority value** - overrides with higher priority values are applied last
+2. if the custom priority values are the same, then the **override type** is checked:
+    1. Channel-type based overrides are applied first,
+    2. Then channel based overrides,
+    3. Then role based overrides,
+    4. And lastly, emoji based overrides are applied.
+3. if both overrides are emoji-based overrides, then:
+    1. the override with a higher **Required Stars** value is prioritised
+    2. if the value is the same (or not set and is inherited), the override of the emojis with the most unique reactions is prioritised
+    3. if they have the same amount of unique reactions, the override of the emojis with the most reactions in total is prioritised
+4. if all else fails, then the **creation date** is checked. Newer overrides are applied last.
+
+As the message could have several different reactions, not all emoji-based overrides of the emojis used to react are applied.
+
+The bot takes the most prioritised emoji-based override, and uses the emojis that override applies to, to determine the "active" emojis. It then only uses emoji-based overrides that apply to any one of those "active" emojis.
+
+### Editing Messages
+When editing messages, if the reactions have changed causing the emoji-based overrides used to be different, and the different emoji-based overrides have a different starboard set, then the starboard message will be moved to the new starboard.
+
+Let's say a server has one emoji-based override for 🍣 called "Sushi", the override requires 3 reactions and the override has the starboard set to `#sushiboard`.
+
+If the message has 5 ⭐ 2 🍣, for posting messages the "Sushi" override isn't used yet because the message doesn't yet have 3 🍣, and the message is posted to `#starboard`.
+
+If someone reacts with 🍣, the message will now have 3 🍣 and the "Sushi" override will now be applied for posting the message, which will then change the starboard channel to `#sushiboard`. As the message is posted to `#starboard` already, the bot will delete the message and repost it in `#sushiboard`.
+
+---
+
+<Aside type="tip">
+    Emoji-based overrides are an experimental feature. If you ever get stuck, you can ask for help in the <ExternalLink type={LinkType.Support}/>.
+</Aside>

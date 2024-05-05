@@ -2,7 +2,7 @@
 title: Channel-Based Overrides
 description: Learn how to create channel-based overrides
 sidebar:
-    order: 1
+    order: 10
 ---
 
 import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
@@ -12,7 +12,7 @@ Channel-based overrides are useful when you want to change specific settings for
 
 ##### This guide will use the following scenario:
 
-You have your Server Settings set to use the ⭐ emoji, but you want to use the 🎨 emoji for your art channels.
+You have your Server Settings set to use the ⭐ emoji, but you want messages in your art channels to be sent to an art starboard using the 🎨 emoji.
 
 <Steps>
 
@@ -45,8 +45,13 @@ You have your Server Settings set to use the ⭐ emoji, but you want to use the 
             name: 'emojis',
             value: '🎨',
         },
+        {
+            type: OptionType.Channel,
+            name: 'starboard',
+            value: 'art-starboard',
+        },
     ]}/>
 
 </Steps>
 
-That's it!  Messages in the art channels will now use the 🎨 emoji.
+That's it!  Messages in the art channels will now use the 🎨 emoji and will be sent to `#art-starboard`.
