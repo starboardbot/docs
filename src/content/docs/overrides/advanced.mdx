@@ -18,15 +18,15 @@ When you have multiple overrides that can apply at a time, you may wonder which 
     Overrides that have the **Starboard** setting set will simply override other **Starboard** setting values.
 </Aside>
 
-**The overrides that are applied last are the most prioritied as their settings and modifications are kept.** The overrides that are applied first may have modifications overridden by the next override.
+**The overrides that are applied last are the most prioritised as their settings and modifications are kept.** The overrides that are applied first may have modifications overridden by the next override.
 
 Overrides are applied as follows:
 1. **custom priority value** - overrides with higher priority values are applied last
 2. if the custom priority values are the same, then the **override type** is checked:
-    1. Channel-type based overrides are applied first,
-    2. Then channel based overrides,
-    3. Then role based overrides,
-    4. And lastly, emoji based overrides are applied.
+    1. Channel-type-based overrides are applied first,
+    2. Then channel-based overrides,
+    3. Then role-based overrides,
+    4. And lastly, emoji-based overrides are applied.
 3. if the types are the same, then the **creation date** is checked. Newer overrides are applied last.
 
 You can give overrides custom priority values with the `priority` option:
@@ -76,7 +76,7 @@ If a message is starred in `#channel-2` sent by a user with just the `@Role 1` r
 
 
 ## Inheriting From Other Overrides
-By default, overrides inherit from the server settings. You can make an override inherit from other overrides instead, incase you have a big override with a lot of modifications made, and you want to copy those modifications to another override.
+By default, overrides inherit from the server settings. You can make an override inherit from other overrides instead, in case you have a big override with a lot of modifications made, and you want to copy those modifications to another override.
 
 If an override inherits from another override, and multiple overrides are made (like in the scenarios above), all the override-specific inherited modifications are applied before the next overrides, then finally the server settings.
 
