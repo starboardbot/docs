@@ -7,6 +7,7 @@ sidebar:
 
 import { Aside, Steps } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import InlineMention from '../../../components/InlineMention.astro';
 
 Role-based overrides are useful when you want to change specific settings based on the roles the author of the starred message has.
 
@@ -16,11 +17,11 @@ Role-based overrides are useful when you want to change specific settings based 
 
 ##### This guide will use the following scenario:
 
-You have your Server Settings set to send messages to `#starboard` after 7 stars, but members with the `@Prestigious` role are special, they get their messages sent to `#prestigious-starboard` after 3 stars.
+You have your Server Settings set to send messages to <InlineMention name="#starboard"/> after 7 stars, but members with the <InlineMention name="@Prestigious"/> role are special, they get their messages sent to <InlineMention name="#prestigious-starboard"/> after 3 stars.
 
 <Steps>
 
-1.  The first thing you need to do is create an override for the `@Prestigious` role:
+1.  The first thing you need to do is create an override for the <InlineMention name="@Prestigious"/> role:
 
     <CommandInput command="overrides create role" options={[
         {
@@ -29,9 +30,9 @@ You have your Server Settings set to send messages to `#starboard` after 7 stars
             value: 'Prestigious',
         },
         {
-            type: OptionType.String,
+            type: OptionType.Role,
             name: 'roles',
-            value: '@Prestigious',
+            value: 'Prestigious',
         }
     ]}/>
 
@@ -44,9 +45,9 @@ You have your Server Settings set to send messages to `#starboard` after 7 stars
                 value: 'Prestigious',
             },
             {
-                type: OptionType.String,
+                type: OptionType.Role,
                 name: 'roles',
-                value: '@Prestigious',
+                value: 'Prestigious',
             },
             {
                 type: OptionType.Channel,
@@ -80,4 +81,4 @@ You have your Server Settings set to send messages to `#starboard` after 7 stars
 
 </Steps>
 
-That's it!  Messages by members with the `@Prestigious` role will now be sent to `#prestigious-starboard` after getting 3 stars.
+That's it!  Messages by members with the <InlineMention name="@Prestigious"/> role will now be sent to <InlineMention name="#prestigious-starboard"/> after getting 3 stars.

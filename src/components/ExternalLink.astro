@@ -9,6 +9,7 @@ export enum LinkType {
     Invite = 'invite',
 }
 
+import { Icon } from '@astrojs/starlight/components';
 import { links, } from '../config';
 
 const { type, } = Astro.props;
@@ -17,8 +18,8 @@ const href = links[type];
 
 ---
 
-<a href={href} target="_blank"><slot>{
+<a href={href} target="_blank" class="no-underline"><slot>{
     type === LinkType.Premium ? 'Starboard Premium'
     : type === LinkType.Support ? 'Support Server'
     : '???'
-}</slot></a>
+}</slot><Icon name="external" class="pl-1 !inline-block align-middle" size="1.25rem" /></a>

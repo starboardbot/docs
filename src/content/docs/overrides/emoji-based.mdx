@@ -8,6 +8,7 @@ sidebar:
 import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
 import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+import InlineMention from '../../../components/InlineMention.astro';
 
 Emoji-based overrides are useful when you want to change specific settings based on the emoji used to star or downvote the message.
 <Aside type="caution">
@@ -32,7 +33,7 @@ If set, while posting messages, the override will only apply once it has **Requi
 
 So, if an override applies to 🍣 and has **Required Stars** set to 2, the message can have as many ⭐ reactions but once it gets 2 🍣 reactions, then that override is applied for posting the message.
 
-This means you can have a normal starboard, then an override that changes the starboard to `#sushi` when the message gets 2 🍣 reactions.
+This means you can have a normal starboard, then an override that changes the starboard to <InlineMention name="#sushi"/> when the message gets 2 🍣 reactions.
 
 ### Counting Stars
 Note that emoji overrides don't change the way stars are counted. All emojis that can be used to star the message will be counted.
@@ -43,7 +44,7 @@ So, if your server settings are set up to use the emojis ⭐ 🍣 to star messag
 ## Examples
 ### Scenario 1: Skullboard
 
-You have a default starboard channel `#starboard` that messages go to after 3 ⭐ but you want messages to go to a separate starboard channel `#skullboard` after 3 💀.
+You have a default starboard channel <InlineMention name="#starboard"/> that messages go to after 3 ⭐ but you want messages to go to a separate starboard channel <InlineMention name="#skullboard"/> after 3 💀.
 
 <Steps>
 
@@ -60,7 +61,7 @@ You have a default starboard channel `#starboard` that messages go to after 3 �
     <Aside type="caution">
         If you have other overrides that modify and override the **Emojis** setting, make sure you change those as well.
 
-        For example, if you have ⭐ as the server emoji, but an override for `#general` that sets the emoji to 🍣, this skullboard override won't work for messages in `#general` as the **Emoji** setting there has been overridden and doesn't include 💀.
+        For example, if you have ⭐ as the server emoji, but an override for <InlineMention name="#general"/> that sets the emoji to 🍣, this skullboard override won't work for messages in <InlineMention name="#general"/> as the **Emoji** setting there has been overridden and doesn't include 💀.
     </Aside>
 
 2. Then, create an override for the 💀 emoji:
@@ -124,12 +125,12 @@ You have a default starboard channel `#starboard` that messages go to after 3 �
 
 </Steps>
 
-That's it! Now, messages will be sent to `#skullboard` once they get 3 💀 reactions.
+That's it! Now, messages will be sent to <InlineMention name="#skullboard"/> once they get 3 💀 reactions.
 
 
 ### Scenario 2: Starboard Levels
 
-You have a starboard channel `#starboard` that messages go to after 3 ⭐ but you want the best starred messages to go to a separate starboard channel `#bestboard` after they get 20 ⭐.
+You have a starboard channel <InlineMention name="#starboard"/> that messages go to after 3 ⭐ but you want the best starred messages to go to a separate starboard channel <InlineMention name="#superboard"/> after they get 20 ⭐.
 
 You'll achieve this by creating an emoji override for ⭐ that's only applied after 20 reactions, and changes the **Starboard** setting.
 
@@ -196,11 +197,11 @@ You'll achieve this by creating an emoji override for ⭐ that's only applied af
 
 </Steps>
 
-That's it! Now, messages will be moved from `#starboard` to `#superboard` once they get 20 ⭐ reactions.
+That's it! Now, messages will be moved from <InlineMention name="#starboard"/> to <InlineMention name="#superboard"/> once they get 20 ⭐ reactions.
 
 ### Scenario 3: Staff Pins
 
-You have a default starboard channel `#starboard` that messages go to after 5 ⭐ but you want messages to go to a separate starboard channel `#staff-pins` after 2 📌 from moderators.
+You have a default starboard channel <InlineMention name="#starboard"/> that messages go to after 5 ⭐ but you want messages to go to a separate starboard channel <InlineMention name="#staff-pins"/> after 2 📌 from moderators.
 
 <Steps>
 
@@ -295,7 +296,7 @@ You have a default starboard channel `#starboard` that messages go to after 5 �
 
 </Steps>
 
-That's it! Now, messages will be moved to `#staff-pins` if they get 2 📌 reactions from moderators with the `@Staff` role.
+That's it! Now, messages will be moved to <InlineMention name="#staff-pins"/> if they get 2 📌 reactions from moderators with the <InlineMention name="@Staff"/> role.
 
 ---
 
@@ -325,11 +326,11 @@ The bot takes the most prioritised emoji-based override, and uses the emojis tha
 ### Editing Messages
 When editing messages, if the reactions have changed causing the emoji-based overrides used to be different, and the different emoji-based overrides have a different starboard set, then the starboard message will be moved to the new starboard.
 
-Let's say a server has one emoji-based override for 🍣 called "Sushi", the override requires 3 reactions and the override has the starboard set to `#sushiboard`.
+Let's say a server has one emoji-based override for 🍣 called "Sushi", the override requires 3 reactions and the override has the starboard set to <InlineMention name="#sushiboard"/>.
 
-If the message has 5 ⭐ 2 🍣, for posting messages the "Sushi" override isn't used yet because the message doesn't yet have 3 🍣, and the message is posted to `#starboard`.
+If the message has 5 ⭐ 2 🍣, for posting messages the "Sushi" override isn't used yet because the message doesn't yet have 3 🍣, and the message is posted to <InlineMention name="#starboard"/>.
 
-If someone reacts with 🍣, the message will now have 3 🍣 and the "Sushi" override will now be applied for posting the message, which will then change the starboard channel to `#sushiboard`. As the message is posted to `#starboard` already, the bot will delete the message and repost it in `#sushiboard`.
+If someone reacts with 🍣, the message will now have 3 🍣 and the "Sushi" override will now be applied for posting the message, which will then change the starboard channel to <InlineMention name="#sushiboard"/>. As the message is posted to <InlineMention name="#starboard"/> already, the bot will delete the message and repost it in <InlineMention name="#sushiboard"/>.
 
 ---
 

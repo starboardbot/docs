@@ -7,6 +7,7 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import InlineMention from '../../../components/InlineMention.astro';
 
 More ambitious users might wish to create more complicated setups with their overrides.
 This guide will walk you through the different, more advanced concepts to do with overrides.
@@ -53,21 +54,21 @@ Overrides have a default custom priority value of 0.
 
 ### Example Setup
 Let's say you have the following setup:
-- "Channel Override (A)" for `#channel-1`, `#channel-2` with priority value 1
-- "Role Override (B)" for `@Role 1`
-- "Channel Override 2 (C)" for `#channel-1`
-- "Role Override 2 (D)" from `@Role 1`, `@Role 2`
-- "Channel Override 3 (E)" for `#channel-2` with priority value 2
+- "Channel Override (A)" for <InlineMention name="#channel-1"/>, <InlineMention name="#channel-2"/> with priority value 1
+- "Role Override (B)" for <InlineMention name="@Role 1"/>
+- "Channel Override 2 (C)" for <InlineMention name="#channel-1"/>
+- "Role Override 2 (D)" from <InlineMention name="@Role 1"/>, <InlineMention name="@Role 2"/>
+- "Channel Override 3 (E)" for <InlineMention name="#channel-2"/> with priority value 2
 - "ChannelType Override (F)" for all text/announcement channels
 
-If a message is starred in `#channel-1` sent by a user with just the `@Role 1` role, the following overrides will be applied in the following order:
+If a message is starred in <InlineMention name="#channel-1"/> sent by a user with just the <InlineMention name="@Role 1"/> role, the following overrides will be applied in the following order:
 1. "ChannelType Override (F)" (due to override type),
 1. then "Channel Override 2 (C)", (due to override type)
 1. then "Role Override (B)", (due to override type)
 1. then "Role Override 2 (D)", (due to override type, created after previous role override)
 1. then lastly "Channel Override (A)". (due to custom priority value of 1)
 
-If a message is starred in `#channel-2` sent by a user with just the `@Role 1` role, the following overrides will be applied in the following order:
+If a message is starred in <InlineMention name="#channel-2"/> sent by a user with just the <InlineMention name="@Role 1"/> role, the following overrides will be applied in the following order:
 1. "ChannelType Override (F)" (due to override type),
 1. then "Role Override (B)", (due to override type)
 1. then "Role Override 2 (D)", (due to override type, created after previous role override)
@@ -81,12 +82,12 @@ By default, overrides inherit from the server settings. You can make an override
 If an override inherits from another override, and multiple overrides are made (like in the scenarios above), all the override-specific inherited modifications are applied before the next overrides, then finally the server settings.
 
 Say if you have the following setup:
-- "Channel Override (A)" for `#channel-1`
-- "Channel Override 2 (B)" for `#channel-1`, `#channel-2`
-- "Role Override (C)" for `@Role 1` that inherits from "Channel Override (A)"
-- "Role Override 2 (D)" from `@Role 1`, `@Role 2`
+- "Channel Override (A)" for <InlineMention name="#channel-1"/>
+- "Channel Override 2 (B)" for <InlineMention name="#channel-1"/>, <InlineMention name="#channel-2"/>
+- "Role Override (C)" for <InlineMention name="@Role 1"/> that inherits from "Channel Override (A)"
+- "Role Override 2 (D)" from <InlineMention name="@Role 1"/>, <InlineMention name="@Role 2"/>
 
-If a message is starred in `#channel-2` sent by a user with just the `@Role 1` role, settings will be set in the following order:
+If a message is starred in <InlineMention name="#channel-2"/> sent by a user with just the <InlineMention name="@Role 1"/> role, settings will be set in the following order:
 1. the server settings, as the base
 1. the settings of "Channel Override (A)"
 1. then the settings of "Channel Override 2 (B)"

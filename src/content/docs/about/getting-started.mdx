@@ -8,6 +8,7 @@ sidebar:
 import { Aside, } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
 import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+import InlineMention from '../../../components/InlineMention.astro';
 
 ### Setup
 
@@ -21,7 +22,7 @@ Creating a basic starboard configuration is as simple as running a single comman
     }
 ]}/>
 
-This will set your starboard channel to `#starboard`, and use the default settings of 3 stars. By default, users can't star their own messages, and their reactions will be removed if they attempt to do so.
+This will set your starboard channel to <InlineMention name="#starboard"/>, and use the default settings of 3 stars. By default, users can't star their own messages, and their reactions will be removed if they attempt to do so.
 
 ## Main Settings
 Starboard is highly advanced, but has a few main settings that you'll most likely want to change.

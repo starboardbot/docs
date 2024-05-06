@@ -8,7 +8,7 @@ export default {
 		extend: {
 			colors: {
 				// Your preferred accent color. Indigo is closest to Starlight’s defaults.
-				accent: colors.yellow,
+				accent: colors.starboard,
 				// Your preferred gray scale. Zinc is closest to Starlight’s defaults.
 				gray: colors.zinc,
 				starboard: {
@@ -21,7 +21,7 @@ export default {
 					'600': '#81560d',
 					'700': '#63400d',
 					'800': '#442c0b',
-					'900': '#9E6F15',
+					'900': '#2e1c08',
 				},
 				brand: '#ecd558',
 			},
