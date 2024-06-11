@@ -257,7 +257,28 @@ This setting is very similar to Max Content Displayed.
 ]}/>
 
 
+## Custom Bot
+Have a special community bot or a server theme to follow? You can configure a custom bot to use to post starboard messages, while the magic of Starboard works in the background.
+
+The custom bot will only be used for posting and editing starboard messages, everything else (commands, auto-star, reward roles, etc.) will be handled by me as normal.
+
+All you have to do is provide the token of your custom bot:
+<CommandInput command="custom-bot set" options={[
+    {
+        type: OptionType.String,
+        name: 'token',
+        value: "NjU1Mzkw...",
+    }
+]}/>
+<Aside type="note">
+    All custom bot tokens are encrypted before they are saved, and your bot's token will not be visible to anyone (including you).
+</Aside>
+
+And that's it! Starboard messages will now be posted using your custom bot's profile.
+
+<br />
 ---
+<br />
 
 <Aside type="tip">
     If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
