@@ -6,7 +6,17 @@ sidebar:
 ---
 
 import { Aside, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
 import InlineMention from '../../../components/InlineMention.astro';
+
+## What are overrides?
+
+Overrides are a way to have specific settings applied only in specific contexts, such as when starring messages in a specific channel.
+For example, you could allow self-stars server-wide by enabling the **Self Stars** setting, but then create an override for a specific role or channel that disallows self-stars by disabling the **Self Stars** setting on the override.
+
+Overrides work like the server settings and can have their own display tiers, blacklists, whitelists, message filters, and of course, the individual settings themselves.
+
+### Types of Overrides
 
 Starboard supports several types of overrides, based on a variety of factors:
 
@@ -17,14 +27,6 @@ Starboard supports several types of overrides, based on a variety of factors:
 3.  **Role-based**.  These apply when the message author has specific roles.
 
 4.  **Emoji-based**.  These apply when specific emojis are used.
-
-
-## What are overrides?
-
-Overrides are a way to have specific settings applied only in specific contexts, such as when starring messages in a specific channel.
-For example, you could allow self-stars server-wide by enabling the **Self Stars** setting, but then create an override for a specific role or channel that disallows self-stars by disabling the **Self Stars** setting on the override.
-
-Overrides work like the server settings and can have their own display tiers, blacklists, whitelists, message filters, and of course, the individual settings themselves.
 
 ## Inheriting From Server Settings
 
@@ -38,11 +40,26 @@ Overrides inherit everything from the server settings. This means that if you ch
 Modifications on overrides override modifications on the server settings, but in a select few scenarios the modifications are instead added onto the modifications on the server settings.
 
 ### Blacklists and Whitelists
-Anything you add to the blacklist or whitelist on an override will simply add on to the existing blacklist/whitelist of the server settings. (Your server settings won't be modified.)
+By default, anything you add to the blacklist or whitelist on an override will simply add on to the existing blacklist/whitelist of the server settings. (Your server settings won't be modified.)
 So, if <InlineMention name="@user1"/> and <InlineMention name="@Role 1"/> are blacklisted, and on an override for <InlineMention name="#channel-1"/> you have <InlineMention name="@user2"/> blacklisted, it means that for <InlineMention name="#channel-1"/> there are <InlineMention name="@user1"/>, <InlineMention name="@Role 1"/>, and <InlineMention name="@user2"/> on the blacklist.
 
 Blacklists and whitelists are added together before users/channels are checked to see if they are blacklisted or not.
 This means that if <InlineMention name="@user1"/> is whitelisted on the server settings, adding <InlineMention name="@user1"/> to the blacklist on an override won't change anything - it's like having <InlineMention name="@user1"/> on the blacklist and the whitelist on the server settings.
+
+You can change this behaviour so that the blacklist/whitelist of the override isn't added on to the existing blacklist/whitelist of the server settings, but instead completely overrides it, by disabling the `inherit-blacklist` option.
+<CommandInput command="overrides edit" options={[
+    {
+        type: OptionType.String,
+        name: 'override',
+        value: 'My Override',
+    },
+    {
+        type: OptionType.Boolean,
+        name: 'inherit-blacklist',
+        value: 'False',
+        highlight: true,
+    }
+]}/>
 
 ### Display Tiers
 If you create a display tier for an override, you've now separated the display tiers for the override from the display tiers for the server settings, and fully overridden the display tiers that are used.
@@ -50,7 +67,7 @@ If you create a display tier for an override, you've now separated the display t
 So, you can use a set of display tiers for the server settings but a different set for an override.
 
 ### Filters
-Like blacklists and whitelists, anything you add to the list of filters on an override will simply add on to the existing list of filters on the server settings. (Your server settings won't be modified.)
+By default, like blacklists and whitelists, anything you add to the list of filters on an override will simply add on to the existing list of filters on the server settings. (Your server settings won't be modified.)
 
 So, if your filters are set up as follows:
 - Server Settings
@@ -61,6 +78,21 @@ So, if your filters are set up as follows:
 
 It means a message in <InlineMention name="#channel-1"/> must pass Filter 1, Filter 2, and Filter 3 in order to be starred, but a message elsewhere only has to pass Filter 1 and Filter 2.
 
+You can change this behaviour so that the override's filters aren't added on to the existing list of filters on the server settings, but instead completely overrides it, by disabling the `inherit-filters` option.
+<CommandInput command="overrides edit" options={[
+    {
+        type: OptionType.String,
+        name: 'override',
+        value: 'My Override',
+    },
+    {
+        type: OptionType.Boolean,
+        name: 'inherit-filters',
+        value: 'False',
+        highlight: true,
+    }
+]}/>
+This would mean that a message in <InlineMention name="#channel-1"/> must pass just Filter 3 in order to be starred, and any message elsewhere has to pass Filter 1 and Filter 2.
 
 ---
 
