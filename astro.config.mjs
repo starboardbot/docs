@@ -49,6 +49,12 @@ export default defineConfig({
 					},
 				},
 				{
+					label: 'Leaderboard',
+					autogenerate: {
+						directory: '/leaderboard',
+					},
+				},
+				{
 					label: 'Links',
 					items: [
 						{

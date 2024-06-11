@@ -1,0 +1,122 @@
+---
+title: Custom Leaderboards
+description: Learn how to create custom leaderboards for your server.
+sidebar:
+    order: 3
+---
+
+import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import InlineMention from '../../../components/InlineMention.astro';
+
+As we know, with overrides you can create advanced setups, such as specific settings for an art category.
+<LinkCard title="Overrides" href="../../overrides/overview" />
+But the server leaderboard always show stats based on all data recorded across the server.
+Custom Leaderboards are based on a subset of leaderboard data.
+
+## Custom Leaderboard Stats
+Custom leaderboards work by creating custom leaderboard stats, and only recording them when specific overrides are applied.
+
+Right now, custom leaderboard stats can be based off one of the following stats:
+- Total Stars (`upvotes - downvotes`)
+- Total Upvotes
+- Total Downvotes
+- Times On Starboard
+- Most Starred Message
+
+## Creating Custom Leaderboards
+Let's use the following scenario:
+
+You have a channel-based override **Art** that applies to 5 art related channels. You run art competitions often and want to see leaderboards based on only the amount of stars gotten in these art channels.
+
+<Steps>
+
+1.  The first thing you need to do is to create the custom leaderboard stat.
+
+    <CommandInput command="custom-leaderboard create" options={[
+        {
+            type: OptionType.String,
+            name: 'name',
+            value: 'Art Stars',
+        },
+        {
+            type: OptionType.String,
+            name: 'based-on',
+            value: 'Total Stars',
+        },
+    ]}/>
+
+    <Aside type="tip">
+        If you want your custom leaderboard to display entries in a certain way, you can use the `display` option.
+        <CommandInput command="custom-leaderboard create" options={[
+            {
+                type: OptionType.String,
+                name: 'name',
+                value: 'Art Stars',
+            },
+            {
+                type: OptionType.String,
+                name: 'based-on',
+                value: 'Total Stars',
+            },
+            {
+                type: OptionType.String,
+                name: 'display',
+                value: '# art stars',
+                highlight: true,
+            },
+        ]}/>
+        In the above example, entries will be displayed as `# art stars` — `50 art stars`, `1,000 art stars` etc.
+    </Aside>
+
+2.  So far, this custom leaderboard stat exists but isn't yet being recorded as it hasn't been added to the override you want it to function on.
+
+    We want this stat to be recorded for the art channels, so let's add it to the **Art** override.
+
+    <CommandInput command="custom-leaderboard add" options={[
+        {
+            type: OptionType.String,
+            name: 'stat',
+            value: 'Art Stars',
+        },
+        {
+            type: OptionType.String,
+            name: 'override',
+            value: 'Art',
+        },
+    ]}/>
+
+</Steps>
+
+That's it! Now, stars recorded in any of the art channels will add to the custom **Art Stars** stat.
+Now, if users want to view the custom **Art Stars** leaderboard, they can run the following command:
+<CommandInput command="leaderboard custom" options={[
+    {
+        type: OptionType.String,
+        name: 'stat',
+        value: 'Art Stars',
+    },
+]}/>
+
+
+## Reward Roles
+You can also make reward roles with requirements based on custom leaderboard stats!
+
+For example, to make it so that in order to get a specific role, a user must get a certain number of art stars (from the example above), you can run the following command:
+<CommandInput command="rewardroles create" options={[
+    {
+        type: OptionType.Role,
+        name: 'role',
+        value: 'Artistic Superstars',
+    },
+    {
+        type: OptionType.String,
+        name: 'type',
+        value: 'Custom: Art Stars',
+    },
+    {
+        type: OptionType.Number,
+        name: 'required',
+        value: '50',
+    },
+]}/>

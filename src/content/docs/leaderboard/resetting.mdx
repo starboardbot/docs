@@ -1,0 +1,47 @@
+---
+title: Resetting Leaderboard Data
+description: Learn about different ways of resetting leaderboard data.
+---
+
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import InlineMention from '../../../components/InlineMention.astro';
+
+There are a few leaderboard commands for moderators to manage the leaderboard for the server.
+These can be found alongside other moderator commands for managing starred messages — <InlineMention name="/mod" />.
+
+## Removing Individual Users
+When a member leaves the server, they aren't automatically removed off the leaderboard.
+
+To reset a user's leaderboard data and remove them from all leaderboards, you can run the following command:
+<CommandInput command="mod leaderboard reset-user" options={[
+    {
+        type: OptionType.Role,
+        name: 'user',
+        value: 'deleted-user',
+    }
+]}/>
+
+## Resetting The Whole Leaderboard
+To reset all leaderboards entirely, you can run the following command:
+<CommandInput command="mod leaderboard reset" />
+
+### Timed Resets
+If you wish, you can schedule timed resets.
+You can make it so that every set period of time, all of the leaderboards are reset. This is useful if you run monthly competitions in your server, for example.
+
+You can either schedule a reset every certain number of days:
+<CommandInput command="mod leaderboard auto-reset" options={[
+    {
+        type: OptionType.Number,
+        name: 'days',
+        value: '7',
+    }
+]}/>
+Or can schedule a reset on a certain date of the month:
+<CommandInput command="mod leaderboard auto-reset" options={[
+    {
+        type: OptionType.Number,
+        name: 'date-of-month',
+        value: '1',
+    }
+]}/>

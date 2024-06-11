@@ -1,0 +1,30 @@
+---
+title: Hall Of Fame
+description: Learn what the Hall of Fame is and how it works.
+sidebar:
+    order: 1
+---
+
+import { Aside, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import InlineMention from '../../../components/InlineMention.astro';
+
+The Hall of Fame is similar to the leaderboard, except that it's a list of messages that were picked out by various moderators.
+Like server pins and the starboard itself, they allow moderators to once again highlight messages that "belong in a museum" - the best messages on the server.
+<CommandInput command="hall-of-fame" />
+
+To add a message to the Hall of Fame, you can either run the following command:
+<CommandInput command="mod hall-of-fame add" options={[
+    {
+        type: OptionType.Message,
+        name: 'starred-message',
+    },
+]}/>
+
+Or you can use the <InlineMention name="Add to Hall of Fame" /> context menu command on the message you want to add.
+
+<Aside type="note">
+    The Hall of Fame is not a starboard, and the <InlineMention name="Add to Hall of Fame" /> context menu command won't post the message to the starboard.
+
+    If you wish to post a message to the starboard, you can use the <InlineMention name="Force to Starboard" /> context menu command instead.
+</Aside>

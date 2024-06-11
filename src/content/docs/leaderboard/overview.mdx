@@ -1,0 +1,31 @@
+---
+title: Overview
+description: Learn about the server leaderboard
+sidebar:
+    order: 0
+---
+
+import { Aside, } from '@astrojs/starlight/components';
+import InlineMention from '../../../components/InlineMention.astro';
+
+
+### The Leaderboard Commands
+As more and more messages get starred in your server, the bot records a set of information so it can create a leaderboard for your users.
+
+There are 3 types of basic server leaderboards:
+
+1. **Total Stars** - users with the most stars gained
+    <Aside type="note">
+        Self stars are not recorded towards this leaderboard.
+    </Aside>
+2. **Times On Starboard** - users with the most times on the starboard
+3. **Most Starred Message** - users with the most stars on a message
+
+<Aside type="note">
+    Bots are always recorded and displayed on the leaderboard, even if the **Filter Bots** setting is enabled.
+</Aside>
+
+### The Stats Commands
+The <InlineMention name="/stats" /> commands aren't based on leaderboard data, but rather calculations based on the actual starred messages themselves.
+
+This means that they cannot be reset or augmented, and the stats displayed in these commands include self-stars.

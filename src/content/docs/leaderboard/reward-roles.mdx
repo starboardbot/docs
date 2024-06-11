@@ -1,0 +1,70 @@
+---
+title: Reward Roles
+description: Learn how to create and customise reward roles in your server.
+sidebar:
+    order: 2
+---
+
+import { Aside, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import InlineMention from '../../../components/InlineMention.astro';
+
+Reward roles are a fun way to reward users for getting their messages starred.
+
+They are roles that are given to users after reaching a certain requirement, such as:
+1. **Total Stars** - reward roles based on the stars users have
+2. **Most Starred Message** - reward roles based on the user's most starred message
+3. **Times On Starboard** - reward roles based on how many times users have been on the starboard
+4. **Times On Hall Of Fame** - reward roles based on how many times users have gotten on the Hall Of Fame
+
+## Creating Reward Roles
+To create a reward role, you just need to run one command:
+<CommandInput command="rewardroles create" options={[
+    {
+        type: OptionType.Role,
+        name: 'role',
+        value: 'Superstars',
+    },
+    {
+        type: OptionType.String,
+        name: 'type',
+        value: 'Total Stars',
+    },
+    {
+        type: OptionType.Number,
+        name: 'required',
+        value: '100',
+    },
+]}/>
+This created a reward role <InlineMention name="@Superstars" /> that is awarded to users after obtaining **100** stars in total.
+
+### Multiple Requirements
+If you create the same reward role again but with a different type, you can allow users to achieve either one of those requirements in order to get the role.
+<CommandInput command="rewardroles create" options={[
+    {
+        type: OptionType.Role,
+        name: 'role',
+        value: 'Superstars',
+    },
+    {
+        type: OptionType.String,
+        name: 'type',
+        value: 'Times On Starboard',
+    },
+    {
+        type: OptionType.Number,
+        name: 'required',
+        value: '20',
+    },
+]}/>
+Now, the reward role <InlineMention name="@Superstars" /> is awarded to users after they either obtain **100** stars in total, or get on the starboard **20** times.
+
+## Removing Old Reward Roles
+By default, users get to keep the old reward roles they obtain. If you wish to change this behaviour, disable the **Keep Old Reward Roles** setting.
+<CommandInput command="settings edit misc" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'keep-old-reward-roles',
+        value: 'False',
+    }
+]}/>
