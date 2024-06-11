@@ -1,0 +1,111 @@
+---
+title: Basic Filtering
+description: Learn the ways you can achieve basic filtering of messages.
+sidebar:
+  order: 0
+---
+
+import { Aside, Steps, } from '@astrojs/starlight/components';
+import CommandInput, { OptionType, } from '../../../components/CommandInput.astro';
+import InlineMention from '../../../components/InlineMention.astro';
+
+Before creating message filters, you should know of simple settings and features which aid in filtering which messages are allowed to be starred.
+
+## Blacklist and Whitelist
+
+You can blacklist users/roles/channels so that messages sent by users on the blacklist, with a role on the blacklist, or messages sent in channels on the blacklist, cannot be starred.
+Blacklisted users also cannot add stars to messages by default.
+<CommandInput command="blacklist add role" options={[
+    {
+        type: OptionType.Role,
+        name: 'role',
+        value: "Role1",
+    }
+]}/>
+
+If you want a user/role/channel to be exempt from the blacklist, you can add them to the whitelist.
+<CommandInput command="whitelist add user" options={[
+    {
+        type: OptionType.Role,
+        name: 'user',
+        value: "user1",
+    }
+]}/>
+
+A more specific blacklist will beat a less specific whitelist. This means that if <InlineMention name="@everyone"/> is blacklisted but <InlineMention name="@user1"/> is whitelisted, the user is whitelisted.
+But if <InlineMention name="@user1"/> is blacklisted and <InlineMention name="@everyone"/> is whitelisted, the user is still blacklisted, as targetting the user is more specific.
+
+
+## Filtering Settings
+
+There are also a few simple settings related to filtering messages, that you should know about.
+
+### Self Stars
+
+When **Self Stars** is disabled, users won't be allowed to star their own messages.
+
+<CommandInput command="settings edit filtering" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'self-stars',
+        value: "False",
+    }
+]}/>
+
+This is disabled by default.
+
+### Filter Bots
+
+When **Filter Bots** is enabled, users won't be allowed to star messages sent by bots.
+
+<CommandInput command="settings edit filtering" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'filter-bots',
+        value: "True",
+    }
+]}/>
+
+This is disabled by default.
+
+### Filter Blacklisted Users
+
+You can blacklist users so they can't star messages or have their messages on the starboard.
+The **Filter Blacklisted Users** setting modifies this behaviour regarding blacklisted users.
+
+You have 3 options:
+- filter blacklisted authors, meaning no one can star messages sent by blacklisted users
+- filter blacklisted reactors, meaning blacklisted users can't star messages by anyone
+- filter both blacklisted authors & reactors, meaning blacklisted users can't star messages or have their messages on the starboard. This is the default behaviour.
+
+To change this behaviour, edit the **Filter Blacklisted Users** setting.
+
+<CommandInput command="settings edit filtering" options={[
+    {
+        type: OptionType.String,
+        name: 'filter-blacklisted-users',
+        value: "Filter Both (Reactors & Message Authors)",
+    }
+]}/>
+
+### Remove Invalid Reactions
+
+As the name implies, enabling this setting causes invalid reactions to be removed, instead of just being ignored.
+
+<CommandInput command="settings edit filtering" options={[
+    {
+        type: OptionType.Boolean,
+        name: 'remove-invalid-reactions',
+        value: "False",
+    }
+]}/>
+
+Invalid reactions include:
+- reacting on your own message when **Self Stars** is disabled
+- reactions by blacklisted users
+- reacting to a message sent by a user that is blacklisted
+- reacting on a bot's message when **Filter Bots** is enabled
+- reactions in a blacklisted channel
+- **reacting to a message that doesn't pass message filters**
+
+This is enabled by default.
