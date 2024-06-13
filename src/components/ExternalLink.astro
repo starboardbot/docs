@@ -1,6 +1,7 @@
 ---
 interface Props {
     type: LinkType;
+    href?: string
 }
 
 export enum LinkType {
@@ -12,9 +13,9 @@ export enum LinkType {
 import { Icon } from '@astrojs/starlight/components';
 import { links, } from '../config';
 
-const { type, } = Astro.props;
+const { type, href: backupHref } = Astro.props;
 
-const href = links[type];
+const href = backupHref ?? links[type];
 
 ---
 

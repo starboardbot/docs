@@ -1,0 +1,61 @@
+---
+title: Privacy Policy
+---
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+import { LinkCard } from '@astrojs/starlight/components';
+import InlineMention from '../../../components/InlineMention.astro';
+
+Effective as of June 2024
+
+---
+
+Starboard (the "Service", the "bot", "we", "us", or "our") is a bot on Discord that allows messages to be "starred" or highlighted, and messages get sent to a separate channel once they get a lot of star reactions from members of your server.
+We respect your privacy and limit the use of personally identifiable information to an absolute minimum.
+
+## What data do we handle?
+The bot can access the content of messages, only because it is necessary for the purpose of displaying such content back to the server members, in the starboard channel you've organised.
+Without server members adding reactions, modifying messages or interacting with the bot via commands, nothing is happening in relation to your server, without your prior consent.
+
+Some identifiable information is in use by the bot, only those that are necessary for the running of the bot and its services, such as for starboard messages, customisation, and tracking valid reactions. This includes:
+- user data - usernames, avatars
+- server member data - nicknames, roles
+- channel data (no names)
+- role data
+- reactions
+- emojis
+- message content
+
+This data is sent to us by Discord and remains in cache. It is not stored by us.
+
+## What data do we store?
+The bot primarily stores the IDs of users, channels, servers, messages, roles, and emojis, which are all necessary for the bot to function. They are used for identification purposes.
+- No usernames, nicknames, display names, server names, or channel names are stored to any database belonging to the bot.
+- No message content is stored to any database, all message content is retrieved from Discord in all cases that it is needed.
+
+### Custom Bots
+When using the Custom Bot feature in your Starboard Premium enabled server, your provided Discord bot token will be **encrypted** and stored in the bot's database.
+This token is not used by us or anyone, for any purpose unbeknown to you, aside from posting messages to your server's starboard channel.
+- This token will continue to be stored in the bot's database for as long as there are existing starboard messages posted with this token, so we can continue to edit those starboard messages.
+
+## Third-party Services
+We use Sentry.io, a third-party service, to collect and manage error reports, which helps us maintain and improve the quality of our service.
+Some data sent to Sentry.io may include personal information, to better help improve the quality of the service and prevent fraud and abuse.
+
+The personal data that is collected is limited to:
+- user names
+- server names
+- channel names
+
+Data is only sent to Sentry.io when an rare, unexpected error occurs.
+
+For further information, please refer to Sentry.io's <ExternalLink href="https://sentry.io/privacy">Privacy Policy</ExternalLink>.
+
+## Who can view my messages?
+We will not view your starred messages or information about your server, unless asked for assistance or unless given permission to do so.
+
+We have taken measures to ensure that only members of your server, in your server, can view messages sent within the server.
+
+Messages starred in channels that users do not have access to, will not be retrievable by the user in other public channels via public commands.
+
+## Contact
+If you have any questions or concerns regarding this Privacy Policy, you can contact us in the <ExternalLink type={LinkType.Support}/>, or you can contact the bot owner <InlineMention name="@thenoob27" /> on Discord.

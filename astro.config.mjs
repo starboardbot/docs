@@ -55,6 +55,12 @@ export default defineConfig({
 					},
 				},
 				{
+					label: 'Legal',
+					autogenerate: {
+						directory: '/legal',
+					},
+				},
+				{
 					label: 'Links',
 					items: [
 						{
