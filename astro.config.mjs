@@ -90,13 +90,14 @@ export default defineConfig({
 				{
 					tag: 'script',
 					attrs: {
-						src: 'https://unpkg.com/twemoji@latest/dist/twemoji.min.js',
+						src: 'https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js',
 						crossorigin: 'anonymous',
+						defer: true,
 					},
 				},
 				{
 					tag: 'script',
-					content: 'window.addEventListener(\'load\', () => {console.log(\'loaded\'); twemoji.parse(document.body, {\'base\':\'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/\'})})'
+					content: 'window.addEventListener(\'load\', () => {console.log(\'loaded\'); twemoji.parse(document.body, {\'base\':\'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/\'})})',
 				},
 			],
 			components: {
