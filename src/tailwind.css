@@ -10,7 +10,7 @@ https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 /* Fonts */
 :root {
 	--sl-font: Lexend Variable;
-	font-weight: 300;
+	@apply font-light;
 }
 
 :root {
@@ -23,8 +23,7 @@ nav:has(#starlight__on-this-page) ul li {
 }
 
 h1 {
-	font-weight: 700;
-	@apply text-center xl:text-start
+	@apply text-center xl:text-start font-bold
 }
 
 
@@ -33,7 +32,7 @@ h1 {
 }
 
 .content-panel {
-	border: none !important;
+	@apply !border-none
 }
 
 .starlight-aside {
@@ -77,26 +76,34 @@ h1 {
 
 /* Twemoji */
 img.emoji {
-	height: 1.2em;
-	width: 1.2em;
 	margin: 0 .05em 0 .1em !important;
 	vertical-align: -0.1em;
 
-	@apply inline-flex;
+	@apply inline-flex h-[1.2em] w-[1.2em];
  }
 
 #command img.emoji {
-	@apply align-super;
-	height: 1.5em;
-	width: 1.5em;
+	@apply align-super h-5 w-5;
 }
 
 #option img.emoji {
-	margin-top: auto !important;
-	margin-bottom: auto !important;
+	@apply !my-auto;
 }
 
 /* markdown */
 code {
 	@apply rounded-sm
+}
+
+/* heading link styling */
+.heading-link::after {
+	@apply opacity-0 ps-2 transition-all duration-300 content-['#'] text-[color:var(--sl-color-text-accent)];
+}
+
+.heading-link:hover::after {
+	@apply opacity-100;
+}
+
+.heading-link {
+	@apply no-underline !text-[color:var(--sl-color-white)];
 }

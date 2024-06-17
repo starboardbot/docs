@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import starlightLinksValidator from 'starlight-links-validator';
 import { links, } from './src/config';
 
@@ -8,6 +10,21 @@ import { links, } from './src/config';
 export default defineConfig({
 	site: 'https://starboardbot.github.io',
 	base: '/docs',
+	markdown: {
+		rehypePlugins: [
+			rehypeHeadingIds,
+			[
+				rehypeAutolinkHeadings,
+				{
+					behavior: 'wrap',
+					properties: {
+						tabIndex: -1,
+						class: 'heading-link',
+					},
+				},
+			],
+		],
+	},
 	integrations: [
 		starlight({
 			title: 'Starboard',
@@ -19,7 +36,7 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
-					label: "About",
+					label: 'About',
 					autogenerate: {
 						directory: '/about/',
 					},
@@ -31,7 +48,7 @@ export default defineConfig({
 					},
 				},
 				{
-					label: "Settings",
+					label: 'Settings',
 					autogenerate: {
 						directory: '/settings/',
 					},

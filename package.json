@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
+    "@astrojs/markdown-remark": "^5.1.0",
     "@astrojs/starlight": "^0.24.2",
     "@astrojs/starlight-tailwind": "^2.0.3",
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource-variable/lexend": "^5.0.20",
     "astro": "^4.10.2",
+    "rehype-autolink-headings": "^7.1.0",
     "sharp": "^0.32.5",
     "starlight-links-validator": "^0.9.0",
     "tailwindcss": "^3.4.4",
