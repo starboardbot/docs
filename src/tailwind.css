@@ -1,6 +1,67 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Resets */
+button,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+	box-sizing: border-box;
+	/* 1 */
+	border: 0 solid;
+	/* 3 */
+}
+
+@theme {
+	--color-gray-50: #fafafa;
+	--color-gray-100: #f4f4f5;
+	--color-gray-200: #e4e4e7;
+	--color-gray-300: #d4d4d8;
+	--color-gray-400: #a1a1aa;
+	--color-gray-500: #71717a;
+	--color-gray-600: #52525b;
+	--color-gray-700: #3f3f46;
+	--color-gray-800: #27272a;
+	--color-gray-900: #18181b;
+	--color-gray-950: #09090b;
+
+	--color-starboard-50: #fbfaf3;
+	--color-starboard-100: #f8efba;
+	--color-starboard-200: #f1dc7e;
+	--color-starboard-300: #dbb84d;
+	--color-starboard-400: #bd8e2a;
+	--color-starboard-500: #9e6f15;
+	--color-starboard-600: #81560d;
+	--color-starboard-700: #63400d;
+	--color-starboard-800: #442c0b;
+	--color-starboard-900: #2e1c08;
+
+	--color-brand: #ecd558;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentColor);
+	}
+}
 
 /*
 Add additional Tailwind styles to this file, for example with @layer:
@@ -32,7 +93,7 @@ h1 {
 }
 
 .content-panel {
-	@apply !border-none
+	@apply border-none !
 }
 
 .starlight-aside {
@@ -43,56 +104,25 @@ h1 {
 	@apply rounded-xl
 }
 
-/* Dark mode colors. */
-:root {
-	--sl-color-accent-low: theme('colors.neutral.800');
-	--sl-color-accent: #ecd557;
-	--sl-color-accent-high: #eee2a0;
-	--sl-color-white: #ffffff;
-	--sl-color-gray-1: theme('colors.neutral.50');
-	--sl-color-gray-2: theme('colors.neutral.200');
-	--sl-color-gray-3: theme('colors.neutral.500');
-	--sl-color-gray-4: theme('colors.neutral.600');
-	--sl-color-gray-5: theme('colors.neutral.800');
-	--sl-color-gray-6: theme('colors.neutral.900');
-	--sl-color-black: theme('colors.neutral.950');
-}
-/* Light mode colors. */
-:root[data-theme='light'] {
-	--sl-color-accent-low: #eee2a0;
-	--sl-color-accent: #ecd557;
-	--sl-color-accent-high: theme('colors.neutral.950');
-	--sl-color-white: theme('colors.neutral.950');
-	--sl-color-gray-1: theme('colors.neutral.950');
-	--sl-color-gray-2: theme('colors.neutral.900');
-	--sl-color-gray-3: theme('colors.neutral.800');
-	--sl-color-gray-4: theme('colors.neutral.600');
-	--sl-color-gray-5: theme('colors.neutral.500');
-	--sl-color-gray-6: theme('colors.neutral.200');
-	--sl-color-gray-7: theme('colors.neutral.50');
-	--sl-color-black: #ffffff;
-}
-
-
 /* Twemoji */
 img.emoji {
 	margin: 0 .05em 0 .1em !important;
 	vertical-align: -0.1em;
 
 	@apply inline-flex h-[1.2em] w-[1.2em];
- }
+}
 
 #command img.emoji {
 	@apply align-super h-5 w-5;
 }
 
 #option img.emoji {
-	@apply !my-auto;
+	@apply my-auto !;
 }
 
 /* markdown */
 code {
-	@apply rounded-sm
+	@apply rounded-xs
 }
 
 /* heading link styling */
@@ -105,5 +135,5 @@ code {
 }
 
 .heading-link {
-	@apply no-underline !text-[color:var(--sl-color-white)];
+	@apply no-underline text-(color:--sl-color-white) !;
 }
