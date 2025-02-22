@@ -93,7 +93,7 @@ h1 {
 }
 
 .content-panel {
-	@apply border-none !
+	@apply border-none!
 }
 
 .starlight-aside {
@@ -106,7 +106,7 @@ h1 {
 
 /* Twemoji */
 img.emoji {
-	margin: 0 .05em 0 .1em !important;
+	margin: 0 .05em 0 .1em!important;
 	vertical-align: -0.1em;
 
 	@apply inline-flex h-[1.2em] w-[1.2em];
@@ -117,7 +117,7 @@ img.emoji {
 }
 
 #option img.emoji {
-	@apply my-auto !;
+	@apply my-auto!;
 }
 
 /* markdown */
@@ -135,5 +135,5 @@ code {
 }
 
 .heading-link {
-	@apply no-underline text-(color:--sl-color-white) !;
+	@apply no-underline text-(color:--sl-color-white)!;
 }
