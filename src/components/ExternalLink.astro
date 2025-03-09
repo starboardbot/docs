@@ -1,26 +1,31 @@
 ---
 interface Props {
     type: LinkType;
-    href?: string
+    href?: string;
+    title?: string;
 }
 
 export enum LinkType {
     Premium = 'premium',
     Support = 'support',
     Invite = 'invite',
+    Other = 'other',
 }
 
 import { Icon } from '@astrojs/starlight/components';
 import { links, } from '../config';
 
-const { type, href: backupHref } = Astro.props;
+const { type, href: providedHref, title } = Astro.props;
 
-const href = backupHref ?? links[type];
+if (type === LinkType.Other && (!providedHref || !title)) throw new Error('No href and/or title provided for ExternalLink with type Other');
+
+const href = providedHref ?? links[type as Exclude<LinkType, LinkType.Other>];
 
 ---
 
 <a href={href} target="_blank" class="no-underline"><slot>{
-    type === LinkType.Premium ? 'Starboard Premium'
+    title ? title
+    : type === LinkType.Premium ? 'Starboard Premium'
     : type === LinkType.Support ? 'Support Server'
     : '???'
 }</slot><Icon name="external" class="pl-1 inline-block! align-middle" size="1.25rem" /></a>
