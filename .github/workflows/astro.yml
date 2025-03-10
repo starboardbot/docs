@@ -42,9 +42,8 @@ jobs:
           node-version: "20"
 
       - name: Use pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
           run_install: |
             - recursive: true
               args: [--frozen-lockfile, --strict-peer-dependencies]
