@@ -18,7 +18,7 @@ import copyApplicationIDImage from "../../../assets/custom-bot-images/copy-appli
 
 
 ## Using a Custom Bot
-Have a special community bot or a server theme to follow? You can configure a custom bot to use to post starboard messages, while the magic of Starboard works in the background.
+Do you have a special community bot or a server theme to follow? You can configure a custom bot to post starboard messages, while the magic of Starboard works in the background.
 
 <Aside type="note">
    Using a custom bot requires your server to have <ExternalLink type={LinkType.Premium}/>.
@@ -26,10 +26,10 @@ Have a special community bot or a server theme to follow? You can configure a cu
 
 <Aside type="note" title="Things to note">
 - The custom bot is only used for posting and editing starboard messages.
-  - Everything else (listing for reactions, commands, auto-star, reward roles, etc) is still handled by Starboard itself.
+  - Everything else (listening for reactions, commands, auto-star, reward roles, etc) is still handled by Starboard itself.
   - Consequently, this means you still need to have Starboard in your server.
 
-- All custom bot tokens are stored encrypted, and will not be visible to anyone (including you).
+- All custom bot tokens are stored encrypted and will not be visible to anyone (including you).
 </Aside>
 
 <Steps>
@@ -40,13 +40,13 @@ Have a special community bot or a server theme to follow? You can configure a cu
 2. Invite the bot to your server.
 
     <Aside type="tip" title="Hint">
-        You can copy your bot's application ID and paste it below to generate the recommended invite link.
+        Copy your bot's application ID and paste it below to generate the recommended invite link.
         <Image class="rounded-xl shadow-lg" src={copyApplicationIDImage} alt="How to copy the bot's application ID." />
        <InviteGenerator/>
         
     </Aside>
 
-3. Go the bot tab of your newly created application, and copy its token (you may need to reset it first).
+3. Go to the bot tab of your newly created application and copy its token (you may need to reset it first).
      <Image class="rounded-xl shadow-lg" src={copyTokenImage} alt="How to copy the bot's token." />
 
 4. Set your custom bot's token.
@@ -60,5 +60,9 @@ Have a special community bot or a server theme to follow? You can configure a cu
    />
 
 </Steps>
+
+<Aside type="tip">
+    You can freely change your bot's username and avatar at any time on <ExternalLink type={LinkType.Other} href="https://discord.com/developers/applications" title="Discord's Developer Portal"/>.
+</Aside>
 
 And that's it! Starboard messages will now be posted by your custom bot.
