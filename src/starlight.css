@@ -28,3 +28,7 @@
 	--sl-color-gray-7: var(--color-neutral-50);
 	--sl-color-black: #ffffff;
 }
+
+ul > li > ul {
+	margin-top: 0.25rem !important;
+}
