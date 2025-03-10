@@ -1,0 +1,86 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+const INVITE_URL =
+    "https://discord.com/oauth2/authorize?client_id=APPLICATIONID&permissions=446678027328&integration_type=0&scope=bot";
+---
+
+<div
+    class="flex flex-col ml-4! max-w-xs bg-[var(--sl-color-bg)] p-4 rounded-md"
+    id="invite-container"
+>
+    <label
+        for="application-id"
+        class="text-sm font-medium dark:font-normal text-gray-700 dark:text-gray-300"
+    >
+        Application ID
+    </label>
+    <input
+        type="text"
+        id="application-id"
+        name="application-id"
+        placeholder="Your application's ID..."
+        class="bg-[var(--sl-color-bg)] border-starboard-200 dark:border-starboard-400 outline-0 border-1 mt-1! shadow-2xl rounded-md px-2 py-1 ring-offset-2 ring-offset-[var(--sl-color-bg)] focus:ring-2 ring-starboard-300/60 dark:ring-starboard-500/60"
+    />
+    <noscript>
+        <p class="p-4">
+            Uh-Oh! Javascript is needed to run this, which your browser either
+            doesn't support or has disabled.
+            <br />
+            No worries, though! You can simply replace "APPLICATIONID" in the below
+            url with your bot's application ID to create the invite manually :)
+
+            <br />
+            <br />
+
+            {INVITE_URL}
+        </p>
+        <style>
+            #invite-container {
+                max-width: unset !important;
+            }
+        </style>
+    </noscript>
+
+    <a
+        id="invite-link"
+        class="hidden no-underline font-semibold text-starboard-400! hover:text-starboard-600! dark:text-starboard-300! dark:hover:text-starboard-500 pt-2 align-middle"
+        target="_blank"
+        >Invite <Icon
+            name="external"
+            class="pl-1 inline-block! align-middle"
+            size="1.25rem"
+        /></a
+    >
+</div>
+
+<script>
+    const idInput = document.getElementById(
+        "application-id",
+    )! as HTMLInputElement;
+    const inviteLink = document.getElementById(
+        "invite-link",
+    ) as HTMLAnchorElement;
+
+    let debounceTimer: NodeJS.Timeout | undefined;
+    const debounce = (func: Function, delay: number) => {
+        return (...args: any) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => func(...args), delay);
+        };
+    };
+
+    const makeInviteLink = (id: string) => {
+        return `https://discord.com/oauth2/authorize?client_id=${id}&permissions=446678027328&integration_type=0&scope=bot`;
+    };
+
+    const handle = () => {
+        // I forgor how long IDs are. should be enough, right?
+        let id = /(\d{15,30})/.exec(idInput.value.trim())?.[0];
+        if (!id) return;
+
+        inviteLink.setAttribute("href", makeInviteLink(id));
+        inviteLink.classList.remove("hidden");
+    };
+
+    idInput.addEventListener("input", debounce(handle, 200));
+</script>

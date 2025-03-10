@@ -9,16 +9,16 @@ import { Image } from 'astro:assets';
 import { Aside } from '@astrojs/starlight/components';
 import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
 import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
-import mentionAuthorExample from "../../../assets/mention-author-example.png";
-import longMessageExample from "../../../assets/long-message-example.png";
-import longStarboardMessageExample from "../../../assets/long-starboard-message-example.png";
-import maxContentDisplayedExample from "../../../assets/max-content-displayed-example.png";
-import maxEmbedsDisplayedExample from "../../../assets/max-embeds-displayed-example.png";
-import maxMediaDisplayedExample from "../../../assets/max-media-displayed-example.png";
-import useLinksOverButtonsExamples from "../../../assets/use-links-over-buttons-examples.png";
-import messageJumpLinkExamples from "../../../assets/message-jump-link-examples.png";
-import displayRepliedMessageExamples from "../../../assets/display-replied-message-examples.png";
-import reuploadAttachmentsExamples from "../../../assets/reupload-attachments-examples.png";
+import mentionAuthorExample from "../../../assets/sb-message-customisation/mention-author-example.png";
+import longMessageExample from "../../../assets/sb-message-customisation/long-message-example.png";
+import longStarboardMessageExample from "../../../assets/sb-message-customisation/long-starboard-message-example.png";
+import maxContentDisplayedExample from "../../../assets/sb-message-customisation/max-content-displayed-example.png";
+import maxEmbedsDisplayedExample from "../../../assets/sb-message-customisation/max-embeds-displayed-example.png";
+import maxMediaDisplayedExample from "../../../assets/sb-message-customisation/max-media-displayed-example.png";
+import useLinksOverButtonsExamples from "../../../assets/sb-message-customisation/use-links-over-buttons-examples.png";
+import messageJumpLinkExamples from "../../../assets/sb-message-customisation/message-jump-link-examples.png";
+import displayRepliedMessageExamples from "../../../assets/sb-message-customisation/display-replied-message-examples.png";
+import reuploadAttachmentsExamples from "../../../assets/sb-message-customisation/reupload-attachments-examples.png";
 
 
 Starboard offers many ways to customise the starboard message.
@@ -256,29 +256,7 @@ This setting is very similar to Max Content Displayed.
     }
 ]}/>
 
-
-## Custom Bot
-Have a special community bot or a server theme to follow? You can configure a custom bot to use to post starboard messages, while the magic of Starboard works in the background.
-
-The custom bot will only be used for posting and editing starboard messages, everything else (commands, auto-star, reward roles, etc.) will be handled by me as normal.
-
-All you have to do is provide the token of your custom bot:
-<CommandInput command="custom-bot set" options={[
-    {
-        type: OptionType.String,
-        name: 'token',
-        value: "NjU1Mzkw...",
-    }
-]}/>
-<Aside type="note">
-    All custom bot tokens are encrypted before they are saved, and your bot's token will not be visible to anyone (including you).
-</Aside>
-
-And that's it! Starboard messages will now be posted using your custom bot's profile.
-
-<br />
 ---
-<br />
 
 <Aside type="tip">
     If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.

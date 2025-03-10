@@ -10,17 +10,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.3",
-    "@astrojs/markdown-remark": "^5.2.0",
-    "@astrojs/starlight": "^0.26.2",
-    "@astrojs/starlight-tailwind": "^2.0.3",
-    "@astrojs/tailwind": "^5.1.0",
-    "@fontsource-variable/lexend": "^5.0.20",
-    "astro": "^4.15.2",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/markdown-remark": "^6.1.0",
+    "@astrojs/starlight": "^0.32.1",
+    "@astrojs/starlight-tailwind": "^3.0.0",
+    "@astrojs/tailwind": "^6.0.0",
+    "@fontsource-variable/lexend": "^5.1.2",
+    "@tailwindcss/vite": "^4.0.8",
+    "astro": "^5.3.0",
     "rehype-autolink-headings": "^7.1.0",
-    "sharp": "^0.32.5",
-    "starlight-links-validator": "^0.9.0",
-    "tailwindcss": "^3.4.10",
-    "typescript": "^5.5.4"
+    "sharp": "^0.33.5",
+    "starlight-links-validator": "^0.14.3",
+    "tailwindcss": "^4.0.8",
+    "typescript": "^5.7.3"
   }
 }

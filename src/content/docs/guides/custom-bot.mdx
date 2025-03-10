@@ -1,0 +1,68 @@
+---
+title: Custom Bot
+description: Learn how to set up a custom Starboard bot.
+sidebar:
+    order: 5
+---
+
+import { Image } from 'astro:assets';
+import { Aside, Steps } from '@astrojs/starlight/components';
+import CommandInput, { OptionType } from '../../../components/CommandInput.astro';
+import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+import InviteGenerator from '../../../components/InviteGenerator.astro';
+/* ----- Images ----- */
+import createApplicationImage from "../../../assets/custom-bot-images/create-application.png";
+import copyTokenImage from "../../../assets/custom-bot-images/copy-token.png";
+import copyApplicationIDImage from "../../../assets/custom-bot-images/copy-application-id.png";
+
+
+
+## Using a Custom Bot
+Do you have a special community bot or a server theme to follow? You can configure a custom bot to post starboard messages, while the magic of Starboard works in the background.
+
+<Aside type="note">
+   Using a custom bot requires your server to have <ExternalLink type={LinkType.Premium}/>.
+</Aside>
+
+<Aside type="note" title="Things to note">
+- The custom bot is only used for posting and editing starboard messages.
+  - Everything else (listening for reactions, commands, auto-star, reward roles, etc) is still handled by Starboard itself.
+  - Consequently, this means you still need to have Starboard in your server.
+
+- All custom bot tokens are stored encrypted and will not be visible to anyone (including you).
+</Aside>
+
+<Steps>
+
+1. Create a new application on <ExternalLink type={LinkType.Other} href="https://discord.com/developers/applications" title="Discord's Developer Portal"/>.
+    <Image class="rounded-xl shadow-lg" src={createApplicationImage} alt="Discord's Application Creation flow." />
+
+2. Invite the bot to your server.
+
+    <Aside type="tip" title="Hint">
+        Copy your bot's application ID and paste it below to generate the recommended invite link.
+        <Image class="rounded-xl shadow-lg" src={copyApplicationIDImage} alt="How to copy the bot's application ID." />
+       <InviteGenerator/>
+        
+    </Aside>
+
+3. Go to the bot tab of your newly created application and copy its token (you may need to reset it first).
+     <Image class="rounded-xl shadow-lg" src={copyTokenImage} alt="How to copy the bot's token." />
+
+4. Set your custom bot's token.
+    <CommandInput command="custom-bot set" options={[
+    {
+        type: OptionType.String,
+        name: 'token',
+        value: "MTM0ODQyNz...",
+    }
+    ]}
+   />
+
+</Steps>
+
+<Aside type="tip">
+    You can freely change your bot's username and avatar at any time on <ExternalLink type={LinkType.Other} href="https://discord.com/developers/applications" title="Discord's Developer Portal"/>.
+</Aside>
+
+And that's it! Starboard messages will now be posted by your custom bot.

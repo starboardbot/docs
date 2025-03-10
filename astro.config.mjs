@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import tailwind from '@astrojs/tailwind';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import starlightLinksValidator from 'starlight-links-validator';
+import tailwindcss from '@tailwindcss/vite';
 import { links, } from './src/config';
 
 // https://astro.build/config
@@ -100,7 +100,7 @@ export default defineConfig({
 				}
 			],
 			customCss: [
-				'./src/tailwind.css',
+				'./src/global.css',
 				'@fontsource-variable/lexend',
 			],
 			head: [
@@ -120,11 +120,15 @@ export default defineConfig({
 			components: {
 				Pagination: './src/components/Pagination.astro',
 			},
-			plugins: [starlightLinksValidator()],
+			plugins: [starlightLinksValidator({
+				errorOnRelativeLinks: false,
+			})],
 		}),
-		tailwind({ applyBaseStyles: false }),
 	],
 	redirects: {
 		'/guides/getting-started': '/docs/about/getting-started',
+	},
+	vite: {
+		plugins: [tailwindcss()],
 	},
 });
