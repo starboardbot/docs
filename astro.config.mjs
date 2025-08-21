@@ -29,11 +29,11 @@ export default defineConfig({
 		starlight({
 			title: 'Starboard',
 			favicon: 'favicon.png',
-			social: [
-				{ icon: 'discord', label: 'Discord', href: links.support },
-				{ icon: 'github', label: 'GitHub', href: links.github },
-				{ icon: 'patreon', label: 'Patreon', href: links.premium }
-			],
+			social: {
+				discord: links.support,
+				github: links.github,
+				patreon: links.premium,
+			},
 			sidebar: [
 				{
 					label: 'About',
@@ -123,9 +123,6 @@ export default defineConfig({
 			plugins: [starlightLinksValidator({
 				errorOnRelativeLinks: false,
 			})],
-			markdown: {
-				headingLinks: false,
-			},
 		}),
 	],
 	redirects: {
