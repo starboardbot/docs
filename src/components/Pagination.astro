@@ -1,9 +1,9 @@
 ---
-import { Icon, } from '@astrojs/starlight/components';
+import { Icon } from "@astrojs/starlight/components";
 
 const { dir, pagination } = Astro.locals.starlightRoute;
 const { prev, next } = pagination;
-const isRtl = dir === 'rtl';
+const isRtl = dir === "rtl";
 
 const currentHost = new URL(Astro.request.url).hostname;
 ---
@@ -59,7 +59,7 @@ const currentHost = new URL(Astro.request.url).hostname;
 		color: var(--sl-color-gray-2);
 		overflow-wrap: anywhere;
 		/* box-shadow: var(--sl-shadow-md); */
-		@apply shadow-md hover:scale-[1.03] duration-75
+		@apply shadow-md hover:scale-[1.03] duration-75;
 	}
 	[rel='next'] {
 		justify-content: end;
@@ -71,14 +71,14 @@ const currentHost = new URL(Astro.request.url).hostname;
 	}
 
 	a span {
-		@apply text-sm sm:text-base sm:leading-[var(--sl-line-height)]
+		@apply text-sm sm:text-base sm:leading-(--sl-line-height);
 	}
 
 	.link-title {
 		color: var(--sl-color-white);
 		font-size: var(--sl-text-2xl);
 		line-height: 1rem;
-		@apply text-lg sm:text-[length:var(--sl-text-2xl)]
+		@apply text-lg sm:text-(length:--sl-text-2xl);
 	}
 
 	svg {

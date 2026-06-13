@@ -1,26 +1,28 @@
 ---
 interface Props {
-    type: LinkType;
-    href?: string;
-    title?: string;
+	type: LinkType;
+	href?: string;
+	title?: string;
 }
 
 export enum LinkType {
-    Premium = 'premium',
-    Support = 'support',
-    Invite = 'invite',
-    Other = 'other',
+	Premium = "premium",
+	Support = "support",
+	Invite = "invite",
+	Other = "other",
 }
 
-import { Icon } from '@astrojs/starlight/components';
-import { links, } from '../config';
+import { Icon } from "@astrojs/starlight/components";
+import { links } from "../config";
 
 const { type, href: providedHref, title } = Astro.props;
 
-if (type === LinkType.Other && (!providedHref || !title)) throw new Error('No href and/or title provided for ExternalLink with type Other');
+if (type === LinkType.Other && (!providedHref || !title))
+	throw new Error(
+		"No href and/or title provided for ExternalLink with type Other",
+	);
 
 const href = providedHref ?? links[type as Exclude<LinkType, LinkType.Other>];
-
 ---
 
 <a href={href} target="_blank" class="no-underline"><slot>{
