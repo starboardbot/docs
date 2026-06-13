@@ -1,2 +1,2 @@
-declare module '*.astro';
+declare module "*.astro";
 /// <reference path="../.astro/types.d.ts" />

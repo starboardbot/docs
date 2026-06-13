@@ -1,25 +1,25 @@
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
-import { rehypeHeadingIds } from '@astrojs/markdown-remark';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import starlightLinksValidator from 'starlight-links-validator';
-import tailwindcss from '@tailwindcss/vite';
-import { links, } from './src/config';
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
+import starlight from "@astrojs/starlight";
+import tailwindcss from "@tailwindcss/postcss";
+import { defineConfig } from "astro/config";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import starlightLinksValidator from "starlight-links-validator";
+import { links } from "./src/config";
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://starboardbot.github.io',
-	base: '/docs',
+	site: "https://starboardbot.github.io",
+	base: "/docs",
 	markdown: {
 		rehypePlugins: [
 			rehypeHeadingIds,
 			[
 				rehypeAutolinkHeadings,
 				{
-					behavior: 'wrap',
+					behavior: "wrap",
 					properties: {
 						tabIndex: -1,
-						class: 'heading-link',
+						class: "heading-link",
 					},
 				},
 			],
@@ -27,108 +27,156 @@ export default defineConfig({
 	},
 	integrations: [
 		starlight({
-			title: 'Starboard',
-			favicon: 'favicon.png',
-			social: {
-				discord: links.support,
-				github: links.github,
-				patreon: links.premium,
-			},
+			title: "Starboard",
+			favicon: "favicon.png",
+			social: [
+				{
+					icon: "discord",
+					href: links.support,
+					label: "Discord",
+				},
+				{
+					icon: "github",
+					href: links.github,
+					label: "Github",
+				},
+				{
+					icon: "patreon",
+					href: links.premium,
+					label: "Patreon",
+				},
+			],
 			sidebar: [
 				{
-					label: 'About',
-					autogenerate: {
-						directory: '/about/',
-					},
-				},
-				{
-					label: 'Guides',
-					autogenerate: {
-						directory: '/guides/',
-					},
-				},
-				{
-					label: 'Settings',
-					autogenerate: {
-						directory: '/settings/',
-					},
-				},
-				{
-					label: 'Filters',
-					autogenerate: {
-						directory: '/filters',
-					},
-				},
-				{
-					label: 'Overrides',
-					autogenerate: {
-						directory: '/overrides',
-					},
-				},
-				{
-					label: 'Leaderboard',
-					autogenerate: {
-						directory: '/leaderboard',
-					},
-				},
-				{
-					label: 'Legal',
-					autogenerate: {
-						directory: '/legal',
-					},
-				},
-				{
-					label: 'Links',
+					label: "About",
 					items: [
 						{
-							label: 'Support Server',
+							autogenerate: {
+								directory: "/about/",
+							},
+						},
+					],
+				},
+				{
+					label: "Guides",
+					items: [
+						{
+							autogenerate: {
+								directory: "/guides/",
+							},
+						},
+					],
+				},
+				{
+					label: "Settings",
+					items: [
+						{
+							autogenerate: {
+								directory: "/settings/",
+							},
+						},
+					],
+				},
+				{
+					label: "Filters",
+					items: [
+						{
+							autogenerate: {
+								directory: "/filters",
+							},
+						},
+					],
+				},
+				{
+					label: "Overrides",
+					items: [
+						{
+							autogenerate: {
+								directory: "/overrides",
+							},
+						},
+					],
+				},
+				{
+					label: "Leaderboard",
+					items: [
+						{
+							autogenerate: {
+								directory: "/leaderboard",
+							},
+						},
+					],
+				},
+				{
+					label: "Legal",
+					items: [
+						{
+							autogenerate: {
+								directory: "/legal",
+							},
+						},
+					],
+				},
+				{
+					label: "Links",
+					items: [
+						{
+							label: "Support Server",
 							link: links.support,
 						},
 						{
-							label: 'Vote for Starboard',
+							label: "Vote for Starboard",
 							link: links.topGG,
 						},
 						{
-							label: 'Starboard Premium',
+							label: "Starboard Premium",
 							link: links.premium,
 						},
 						{
-							label: 'Invite Starboard',
+							label: "Invite Starboard",
 							link: links.invite,
 						},
 					],
-				}
+				},
 			],
-			customCss: [
-				'./src/global.css',
-				'@fontsource-variable/lexend',
-			],
+			customCss: ["./src/styles/global.css", "@fontsource-variable/lexend"],
 			head: [
 				{
-					tag: 'script',
+					tag: "script",
 					attrs: {
-						src: 'https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js',
-						crossorigin: 'anonymous',
+						src: "https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js",
+						crossorigin: "anonymous",
 						defer: true,
 					},
 				},
 				{
-					tag: 'script',
-					content: 'window.addEventListener(\'load\', () => {console.log(\'loaded\'); twemoji.parse(document.body, {\'base\':\'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/\'})})',
+					tag: "script",
+					content:
+						"window.addEventListener('load', () => {console.log('loaded'); twemoji.parse(document.body, {'base':'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/'})})",
 				},
 			],
 			components: {
-				Pagination: './src/components/Pagination.astro',
+				Pagination: "./src/components/Pagination.astro",
 			},
-			plugins: [starlightLinksValidator({
-				errorOnRelativeLinks: false,
-			})],
+			plugins: [
+				starlightLinksValidator({
+					errorOnRelativeLinks: false,
+				}),
+			],
+			markdown: {
+				headingLinks: false,
+			},
 		}),
 	],
 	redirects: {
-		'/guides/getting-started': '/docs/about/getting-started',
+		"/guides/getting-started": "/docs/about/getting-started",
 	},
 	vite: {
-		plugins: [tailwindcss()],
+		css: {
+			postcss: {
+				plugins: [tailwindcss()],
+			},
+		},
+		//plugins: [tailwindcss()],
 	},
 });
