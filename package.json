@@ -17,7 +17,7 @@
 		"@fontsource-variable/lexend": "^5.2.11",
 		"@tailwindcss/postcss": "^4.3.1",
 		"@tailwindcss/vite": "^4.3.1",
-		"astro": "^6.4.6",
+		"astro": "^7.1.0",
 		"postcss": "^8.5.15",
 		"rehype-autolink-headings": "^7.1.0",
 		"sharp": "^0.35.1",
