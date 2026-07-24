@@ -15,9 +15,11 @@ import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
 An auto-star channel is a channel where Starboard will automatically react to messages with your server's starboard emoji.
 
 <Aside type="note" title="Beating the misconceptions">
-    Auto-star channels do __NOT__ automatically post messages to your starboard channel.
-    
-    They must still get the required amount of stars in order to be posted.
+    - Auto-star channels do __NOT__ automatically post messages to your starboard channel.
+        - They must still get the required amount of stars in order to be posted.
+    - Additionally,
+        - only emojis set as upvote or downvote emojis will be added by auto-star.
+        - auto-star is not a standalone feature; you must have a starboard configured for it to work.
 </Aside>
 
 ### Create an auto-star configuration

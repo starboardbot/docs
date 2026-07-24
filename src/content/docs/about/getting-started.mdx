@@ -6,6 +6,7 @@ sidebar:
 ---
 
 import { Aside, } from '@astrojs/starlight/components';
+import HelpYap from '../../../components/HelpYap.astro';
 import CommandInput from '../../../components/CommandInput.astro';
 import { OptionType } from '../../../components/CommandInput';
 import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
@@ -71,8 +72,4 @@ Lastly, you might want to take a look at **Self Stars**. When disabled, users wo
 
 This is disabled by default.
 
----
-
-<Aside type="tip">
-    If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
-</Aside>
+<HelpYap />

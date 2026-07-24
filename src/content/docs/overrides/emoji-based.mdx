@@ -8,7 +8,7 @@ sidebar:
 import { Aside, LinkCard, Steps } from '@astrojs/starlight/components';
 import CommandInput from '../../../components/CommandInput.astro';
 import { OptionType } from '../../../components/CommandInput';
-import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+import HelpYap from '../../../components/HelpYap.astro';
 import InlineMention from '../../../components/InlineMention.astro';
 
 Emoji-based overrides are useful when you want to change specific settings based on the emoji used to star or downvote the message.
@@ -333,8 +333,4 @@ If the message has 5 ⭐ 2 🍣, for posting messages the "Sushi" override isn't
 
 If someone reacts with 🍣, the message will now have 3 🍣 and the "Sushi" override will now be applied for posting the message, which will then change the starboard channel to <InlineMention name="#sushiboard"/>. As the message is posted to <InlineMention name="#starboard"/> already, the bot will delete the message and repost it in <InlineMention name="#sushiboard"/>.
 
----
-
-<Aside type="tip">
-    Emoji-based overrides are an experimental feature. If you ever get stuck, you can ask for help in the <ExternalLink type={LinkType.Support}/>.
-</Aside>
+<HelpYap />

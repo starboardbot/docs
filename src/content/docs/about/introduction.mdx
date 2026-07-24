@@ -6,6 +6,7 @@ sidebar:
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import HelpYap from '../../../components/HelpYap.astro';
 import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
 import InlineMention from '../../../components/InlineMention.astro';
 
@@ -44,8 +45,4 @@ Starboard offers more ambitious users the ability to create advanced setups, but
 
 Read the next page to learn how to get started.
 
-
-
-<Aside type="tip">
-    If you ever get stuck, you can ask for help in the <ExternalLink type={LinkType.Support}/>.
-</Aside>
+<HelpYap />

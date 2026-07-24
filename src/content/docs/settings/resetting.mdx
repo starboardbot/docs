@@ -8,7 +8,7 @@ sidebar:
 import { Aside, } from '@astrojs/starlight/components';
 import CommandInput from '../../../components/CommandInput.astro';
 import { OptionType } from '../../../components/CommandInput';
-import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+import HelpYap from '../../../components/HelpYap.astro';
 
 You can view all the settings Starboard has to offer with the following command:
 <CommandInput command="settings view" />
@@ -36,8 +36,4 @@ If you just want to reset a singular setting back to its defaults, you can speci
     },
 ]} />
 
----
-
-<Aside type="tip">
-    If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
-</Aside>
+<HelpYap />

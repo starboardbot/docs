@@ -9,7 +9,7 @@ import { Image } from 'astro:assets';
 import { Aside } from '@astrojs/starlight/components';
 import CommandInput from '../../../components/CommandInput.astro';
 import { OptionType } from '../../../components/CommandInput';
-import ExternalLink, { LinkType } from '../../../components/ExternalLink.astro';
+import HelpYap from '../../../components/HelpYap.astro';
 import mentionAuthorExample from "../../../assets/sb-message-customisation/mention-author-example.png";
 import longMessageExample from "../../../assets/sb-message-customisation/long-message-example.png";
 import longStarboardMessageExample from "../../../assets/sb-message-customisation/long-starboard-message-example.png";
@@ -257,8 +257,4 @@ This setting is very similar to Max Content Displayed.
     }
 ]}/>
 
----
-
-<Aside type="tip">
-    If you ever get stuck or need help, you can ask in the <ExternalLink type={LinkType.Support}/>.
-</Aside>
+<HelpYap />
