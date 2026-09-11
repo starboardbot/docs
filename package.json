@@ -20,7 +20,7 @@
 		"astro": "^7.1.3",
 		"postcss": "^8.5.23",
 		"rehype-autolink-headings": "^7.1.0",
-		"sharp": "^0.35.1",
+		"sharp": "^0.35.4",
 		"starlight-links-validator": "^0.24.1",
 		"tailwindcss": "^4.3.1",
 		"typescript": "^6.0.3"
